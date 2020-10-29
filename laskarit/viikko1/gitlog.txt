@@ -1,0 +1,104 @@
+commit 483c0354a150f91963094c83dca63b59c9eee203
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:38:55 2020 +0200
+
+    file1 poistettu ja file2 muutettu file22
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c0f2f4ca4c13b5876979407bca41f19380b3f406
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:35:10 2020 +0200
+
+    uusi hakemisto ja kolme tiedostoa luotu
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 99c2110faba80d63475f708e97909659899a4b36
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:24:22 2020 +0200
+
+    tiedostoja eka.txt ja kolmas.txt muutettu
+
+ eka.txt    | 4 +++-
+ kolmas.txt | 4 +++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+commit 38b100ea394f18e83c47378213c344700ad9825f
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:21:24 2020 +0200
+
+    tiedosto.txt nimeksi muutettu eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit e6aca3b2d1f87d50d5f591f7c68ba1761b780d69
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:20:25 2020 +0200
+
+    toinen.txt poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 53e1893f1e5670d6a791c544317161295ce67613
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:17:26 2020 +0200
+
+    tekstiä lisätty tiedosto.txt
+
+ tiedosto.txt | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit 0f0992de2a893e07c833ea9d111d6e4e4365b7b2
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:08:05 2020 +0200
+
+    uusi hakemisto ja tiedosto
+
+ stuff/running.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 7224aa1d426c2ebd689716e7d4ecc9a8886abae8
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:06:44 2020 +0200
+
+    tiedostojen toinen ja kolmas sisältöjä muutettu
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 77b4f32a2167a8df83a4a4fee6d182a0c7b1299b
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:04:48 2020 +0200
+
+    lisätty kolmas tiedosto
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit d79776fadd6184544cb64826e647f2e0868ed650
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 12:00:06 2020 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit f5f6e07ba85c0fe5c87aa8e90418a9ac2085de53
+Author: Ronja Sonninen <sronja@helsinki.fi>
+Date:   Thu Oct 29 11:57:21 2020 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
