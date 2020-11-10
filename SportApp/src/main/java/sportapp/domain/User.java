@@ -1,14 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sportapp.domain;
 
 /**
- *
- * @author Ronja
+ * Järjestelmän käyttäjää kuvaava luokka
  */
 public class User {
+    private String username;
+    private String password;
+    
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public String getPassword() {
+        return password;
+    }
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof User)) {
+            return false;
+        }
+        User other = (User) object;
+        if (this.username.equals(other.username) &&
+                this.password == other.password) {
+            return true;
+        }
+        return false;
+    }
     
 }
