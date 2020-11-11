@@ -29,8 +29,8 @@ public class Sport {
    public String getType() {
        return type;
    }
-   public User getUser() {
-       return user;
+   public String getUser() {
+       return user.getUsername();
    }
    public double getTime() {
        return time;

@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package sportapp.dao;
 
-/**
- *
- * @author Ronja
- */
+import java.util.List;
+import java.sql.*;
+import sportapp.domain.User;
+
 public interface UserDao {
     
+    void create(User user) throws SQLException;
+    
+    void getAll() throws SQLException;
+
+    public User findByUsername(String username, String password) throws SQLException;
 }
