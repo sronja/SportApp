@@ -23,13 +23,20 @@ public class SportService {
      * @return true jos käyttäjätunnus on olemassa, jos ei ole niin false
      */
     
-    public boolean login(String username) throws SQLException {
+    public boolean login(String username) throws Exception {
         User user = userDao.findByUsername(username);
         if (user == null) {
             return false;
         }
         loggedIn = user;
         return true;
+    }
+    /**
+     * uloskirjautuminen
+     */
+    
+    public void logout() {
+        loggedIn = null;
     }
     
     

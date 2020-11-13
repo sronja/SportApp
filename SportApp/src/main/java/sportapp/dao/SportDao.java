@@ -1,12 +1,13 @@
 
 package sportapp.dao;
 
-import java.sql.*;
+import sportapp.domain.User;
 import sportapp.domain.Sport;
+import java.util.List;
 
 public interface SportDao {
     
-    void create(Sport sport) throws SQLException;
+    Sport create(Sport sport) throws Exception;
     
-    void getAll() throws SQLException;
+    public List<Sport> getAll() ;
 }
