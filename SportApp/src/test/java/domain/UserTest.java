@@ -21,21 +21,16 @@ public class UserTest {
     
     @Before
     public void setUp() {
-        user = new User("maijamallikas", "tamaonsalasana");
+        user = new User("maijamallikas");
     }
     @Test
-    public void equalWhenSameUsernameAndPassword() {
-        User user2 = new User("maijamallikas", "tamaonsalasana");
+    public void equalWhenSameUsername() {
+        User user2 = new User("maijamallikas");
         assertTrue(user.equals(user2));
     }
     @Test
     public void notEqualWhenDifferentUsername() {
-        User user2 = new User("mattimajava", "tamaonsalasana");
-        assertFalse(user.equals(user2));
-    }
-    @Test
-    public void notEqualWhenDifferentPassword() {
-        User user2 = new User("maijamallikas", "thisispassword");
+        User user2 = new User("mattimajava");
         assertFalse(user.equals(user2));
     }
     @Test

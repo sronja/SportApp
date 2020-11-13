@@ -6,18 +6,18 @@ package sportapp.domain;
  */
 public class User {
     private String username;
-    private String password;
+    //private String password;
     
-    public User(String username, String password) {
+    public User(String username) {
         this.username = username;
-        this.password = password;
+        //this.password = password;
     }
     public String getUsername() {
         return username;
     }
-    public String getPassword() {
-        return password;
-    }
+    //public String getPassword() {
+        //return password;
+    
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -27,8 +27,7 @@ public class User {
             return false;
         }
         User other = (User) object;
-        if (this.username.equals(other.username) &&
-                this.password == other.password) {
+        if (this.username.equals(other.username)) {
             return true;
         }
         return false;

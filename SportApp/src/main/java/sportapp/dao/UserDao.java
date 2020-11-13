@@ -2,14 +2,13 @@
 package sportapp.dao;
 
 import java.util.List;
-import java.sql.*;
 import sportapp.domain.User;
 
 public interface UserDao {
     
-    void create(User user) throws SQLException;
+    User create(User user) throws Exception;
     
-    void getAll() throws SQLException;
+    List<User> getAll();
 
-    public User findByUsername(String username, String password) throws SQLException;
+    User findByUsername(String username) ;
 }

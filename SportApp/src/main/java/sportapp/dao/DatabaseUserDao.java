@@ -1,9 +1,11 @@
 
 package sportapp.dao;
 
-
-import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Scanner;
 import sportapp.domain.User;
 
 /**
@@ -12,50 +14,52 @@ import sportapp.domain.User;
  */
 
 public class DatabaseUserDao implements UserDao {
+    private List<User> users;
+    private String file;
 
-
-    @Override
-    public void create(User user) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:user.db");
-        PreparedStatement p = connection.prepareStatement("INSERT INTO User"
-            + " (username, password)"
-            + " VALUES (?, ?)");
-        p.setString(1, user.getUsername());
-        p.setString(2, user.getPassword());
-        
-        p.executeUpdate();
-        p.close();
-        connection.close();
-    }
-
-    @Override
-    public void getAll() throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:user.db");
-        PreparedStatement ps = connection.prepareStatement("SELECT username FROM User");
-        ResultSet r = ps.executeQuery();
-        while (r.next()) {
-            System.out.println("Username: " + r.getString("username"));
+    public DatabaseUserDao(String file) throws Exception {
+        users = new ArrayList<>();
+            this.file = file;
+            try {
+                Scanner reader = new Scanner(new File(file));
+                while (reader.hasNextLine()) {
+                    User u = new User(reader.nextLine());
+                    users.add(u);
+                }
+            } catch (Exception e) {
+                FileWriter writer = new FileWriter(new File(file));
+                writer.close();
+            }
+    
         }
         
-    }
-    @Override
-    public User findByUsername(String username, String password) throws SQLException {
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:user.db");
-        PreparedStatement ps = connection.prepareStatement("SELECT * FROM User WHERE username = ? AND password = ?");
-        ps.setString(1, username);
-        ps.setString(2, password);
-        
-        ResultSet r = ps.executeQuery();
-        if (!r.next()) {
-            return null;
-        } else {
-            User user = new User(r.getString(username), r.getString(password));
-            
-            connection.close();
-            ps.close();
-            r.close();
-            
+        private void save() throws Exception {
+            try (FileWriter writer = new FileWriter(new File(file))) {
+                for (User user : users) {
+                    writer.write(user.getUsername()+ "\n");
+                }
+            }
+        } 
+        @Override
+        public User create (User user) throws Exception {
+            users.add(user);
+            save();
             return user;
         }
-    } 
+        @Override
+        public List<User> getAll() {
+            return users;
+        
+        
+    }
+    @Override
+    public User findByUsername(String username) {
+        return users.stream()
+                .filter(someuser->someuser.getUsername()
+                .equals(username))
+                .findFirst()
+                .orElse(null);
+        
+        }
+    
 }
