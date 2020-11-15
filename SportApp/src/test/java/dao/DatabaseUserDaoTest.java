@@ -13,7 +13,7 @@ import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.io.FileWriter;
 import org.junit.Before;
-import sportapp.dao.DatabaseUserDao;
+import sportapp.dao.FileUserDao;
 import sportapp.dao.UserDao;
 
 /**
@@ -35,7 +35,7 @@ public class DatabaseUserDaoTest {
         try (FileWriter testFile = new FileWriter(userFile.getAbsolutePath())) {
             testFile.write("maijamallikas\n");
         }
-        dao = new DatabaseUserDao(userFile.getAbsolutePath());
+        dao = new FileUserDao(userFile.getAbsolutePath());
     }
     
     @Test

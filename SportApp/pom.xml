@@ -12,6 +12,17 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11</version>
+        </dependency>
     </dependencies>
     <build>
     <plugins>
@@ -28,6 +39,16 @@
                 </execution>
             </executions>
         </plugin>
+        <plugin>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-maven-plugin</artifactId>
+    <version>0.0.3</version>
+    <configuration>
+        <release>${maven.compiler.release}</release>
+        <launcher>launcher</launcher>
+        <mainClass>sportapp.Main</mainClass>
+    </configuration>
+</plugin>
     </plugins>
 </build>
     <properties>

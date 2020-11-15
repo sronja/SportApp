@@ -13,11 +13,11 @@ import sportapp.domain.User;
  * @author Ronja
  */
 
-public class DatabaseUserDao implements UserDao {
+public class FileUserDao implements UserDao {
     private List<User> users;
     private String file;
 
-    public DatabaseUserDao(String file) throws Exception {
+    public FileUserDao(String file) throws Exception {
         users = new ArrayList<>();
             this.file = file;
             try {

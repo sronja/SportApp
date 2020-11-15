@@ -1,7 +1,6 @@
 
 package sportapp.domain;
 
-import java.sql.SQLException;
 import sportapp.dao.UserDao;
 import sportapp.dao.SportDao;
 /**
@@ -23,7 +22,7 @@ public class SportService {
      * @return true jos käyttäjätunnus on olemassa, jos ei ole niin false
      */
     
-    public boolean login(String username) throws Exception {
+    public boolean login(String username) {
         User user = userDao.findByUsername(username);
         if (user == null) {
             return false;

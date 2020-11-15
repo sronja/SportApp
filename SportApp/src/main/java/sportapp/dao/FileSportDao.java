@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DatabaseSportDao implements SportDao {
+public class FileSportDao implements SportDao {
     public List<Sport> sports;
     private String file;
     
-    public DatabaseSportDao(String file, UserDao users) throws Exception {
+    public FileSportDao(String file, UserDao users) throws Exception {
         sports = new ArrayList<>();
         this.file = file;
         
