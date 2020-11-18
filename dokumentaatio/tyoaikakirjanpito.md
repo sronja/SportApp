@@ -9,3 +9,5 @@ päivä | aika (h) | mitä tein
 11.11.| 4        | perustoiminnallisuuden koodaamisen jatkaminen
 13.11.| 1        | --.--
 15.11.| 2        | graafisen suunnittelun aloittaminen
+18.11.| 4        | graafisen suunnittelun jatkaminen ja toiminnallisuuden lisääminen
+yht.  | 17       |
