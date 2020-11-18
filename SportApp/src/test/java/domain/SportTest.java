@@ -20,17 +20,7 @@ public class SportTest {
     
     @Before
     public void setUp() {
-        sport = new Sport(1, "running", 30.0, 5.0, null);
-    }
-    @Test
-    public void equalWhenSameId() {
-        Sport sport2 = new Sport(1, "running", 30.0, 5.0, null);
-        assertTrue(sport.equals(sport2));
-    }
-    @Test
-    public void notEqualWhenDifferentId() {
-        Sport sport2 = new Sport (2, "running", 30.0, 5.0, null);
-        assertFalse(sport.equals(sport2));
+        sport = new Sport( "running", 30.0, 5.0, null);
     }
     @Test
     public void notEqualWhenDifferentType() {

@@ -21,12 +21,11 @@ public class FileSportDao implements SportDao {
         try {
             Scanner reader = new Scanner(new File(file));
             String[] parts = reader.nextLine().split(",");
-            int id = Integer.parseInt(parts[0]);
-            String type = parts[1];
-            Double time = Double.parseDouble(parts[2]);
-            Double distance = Double.parseDouble(parts[3]);
-            User user = users.getAll().stream().filter(us->us.getUsername().equals(parts[4])).findFirst().orElse(null);
-            Sport sport = new Sport(id, type, time, distance, user);
+            String type = parts[0];
+            Double time = Double.parseDouble(parts[1]);
+            Double distance = Double.parseDouble(parts[2]);
+            User user = users.getAll().stream().filter(us->us.getUsername().equals(parts[3])).findFirst().orElse(null);
+            Sport sport = new Sport(type, time, distance, user);
             sports.add(sport);
         }
         catch (Exception e) {
@@ -37,7 +36,7 @@ public class FileSportDao implements SportDao {
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Sport sport: sports) {
-                writer.write(sport.getId() + "," + sport.getType() + "," + sport.getTime() + "," + sport.getDistance() + "," + sport.getUser()  + "\n");
+                writer.write(sport.getType() + "," + sport.getTime() + "," + sport.getDistance() + "," + sport.getUser()  + "\n");
             }
         }
     }
@@ -47,11 +46,12 @@ public class FileSportDao implements SportDao {
     
     @Override
     public Sport create(Sport sport) throws Exception{
-        sport.setId(newId());
         sports.add(sport);
         save();
         return sport;
     }
+
+    
     @Override
     public List<Sport> getAll() {
         return sports;

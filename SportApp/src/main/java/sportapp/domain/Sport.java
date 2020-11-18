@@ -13,12 +13,14 @@ public class Sport {
    private double distance;
    private User user;
    
-   public Sport (int id, String type, double time, double distance, User user) {
+   public Sport (String type, double time, double distance, User user) {
        this.id = id;
        this.type = type;
        this.time = time;
        this.distance = distance;
        this.user = user;
+   
+
    }
    public void setId(int id) {
        this.id = id;
