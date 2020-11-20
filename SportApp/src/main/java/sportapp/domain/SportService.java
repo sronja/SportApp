@@ -13,7 +13,7 @@ public class SportService {
     private SportDao sportDao;
     private User loggedIn;
     
-    public SportService (UserDao userDao, SportDao sportDao) {
+    public SportService(UserDao userDao, SportDao sportDao) {
         this.userDao = userDao;
         this.sportDao = sportDao;
        
@@ -55,8 +55,8 @@ public class SportService {
                 return false;
             }
             return true;
-    }
-    return false;
+        }
+        return false;
     }
     /**
      * Uuden urheilusuorituksen lisääminen käyttäjälle
@@ -65,7 +65,7 @@ public class SportService {
      * @param contentDistance lisättävän urheilusuorituksen matka
      */
     public boolean addSport(String contentType, double contentTime, double contentDistance) {
-        Sport sport = new Sport (contentType, contentTime, contentDistance, loggedIn);
+        Sport sport = new Sport(contentType, contentTime, contentDistance, loggedIn);
         try {
             sportDao.create(sport);
         } catch (Exception e) {
@@ -79,5 +79,14 @@ public class SportService {
                 .stream()
                 .filter(u -> u.getUser().equals(loggedIn))
                 .collect(Collectors.toList());
+    }
+    /**
+     * kirjautunut käyttäjä
+     * 
+     * @return kirjautunut käyttäjä
+     */
+    
+    public User getLoggedUser() {
+        return loggedIn;
     }
 }

@@ -13,11 +13,17 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.util.Properties;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
@@ -33,15 +39,14 @@ import sportapp.domain.Sport;
  */
 public class SportUi extends Application {
 
-    
-    
     private SportService sportService;
     
     private Scene sportScene;
     private Scene userScene;
     private Scene loginScene;
     private Scene addSportScene;
-    private VBox sports;
+    private TableView<Sport> table = new TableView<>();
+    private ObservableList<Sport> data = FXCollections.observableArrayList();
     
     @Override
     public void init() throws Exception {
@@ -55,46 +60,26 @@ public class SportUi extends Application {
         FileUserDao userDao = new FileUserDao(userFile);
         FileSportDao sportDao = new FileSportDao(sportFile, userDao);
         sportService = new SportService(userDao, sportDao);
-    }
-    public Node createSportNode(Sport sport) {
-        HBox box = new HBox(10);
-        Label typeLabel = new Label("Type: " + sport.getType());
-        Label timeLabel = new Label("Time: " + sport.getTime());
-        Label distanceLabel = new Label("Distance: " + sport.getDistance());
-        
-        Region spacer = new Region();
-        HBox.setHgrow(spacer, Priority.ALWAYS);
-        box.setPadding(new Insets(0,5,0,5));
-        
-        box.getChildren().addAll(typeLabel, timeLabel, distanceLabel, spacer);
-        return box;
-    }
-    public void redrawSportList() {
-        sports.getChildren().clear();
-        List<Sport> allSports = sportService.getSport();
-        allSports.forEach(sport->{
-            sports.getChildren().add(createSportNode(sport));
-        });
+
     }
     @Override
-    public void start (Stage window) {
+    public void start(Stage window) {
         //first scene/login scene
         BorderPane loginBorderPane = new BorderPane();
         VBox login = new VBox(10);
         HBox loginPane = new HBox(10);
         login.setPadding(new Insets(10));
-        Label loginLabel = new Label ("Please login to see and add your sports!");
+        Label loginLabel = new Label("Please login to see and add your sports!");
         Label usernameLabel = new Label("Username");
         Label loginMessage = new Label("");
         TextField usernameField = new TextField();
         
-        loginPane.getChildren().addAll( usernameLabel, usernameField);
+        loginPane.getChildren().addAll(usernameLabel, usernameField);
         Button loginButton = new Button("Login");
         Button signupButton = new Button("Sign up");
-        loginButton.setOnAction(e->{
+        loginButton.setOnAction(e-> {
             String username = usernameField.getText();
             if (sportService.login(username)) {
-                redrawSportList();
                 window.setScene(sportScene);
                 usernameField.setText("");
             } else {
@@ -103,7 +88,7 @@ public class SportUi extends Application {
             }
         });
         
-        signupButton.setOnAction(e->{
+        signupButton.setOnAction(e-> {
             usernameField.setText("");
             window.setScene(userScene);
         });
@@ -125,13 +110,13 @@ public class SportUi extends Application {
         Button createUserButton = new Button("Create");
         createUserButton.setPadding(new Insets(10));
         
-        createUserButton.setOnAction(e->{
+        createUserButton.setOnAction(e-> {
             String username = newUsernameField.getText();
             
             if (username.length() < 5) {
                 createUserMessage.setText("Username has to have at least 5 characters!");
                 createUserMessage.setTextFill(Color.RED);
-            } else if (sportService.createUser(username)==true) {
+            } else if (sportService.createUser(username) == true) {
                 createUserMessage.setText("");
                 loginMessage.setText("Creating a new user succeeded.");
                 loginMessage.setTextFill(Color.CORAL);
@@ -147,73 +132,67 @@ public class SportUi extends Application {
         
         // main scene
         
-        ScrollPane scrollPane = new ScrollPane();
         Button logoutButton = new Button("Log out");
+
+        sportScene = new Scene(new Group());
         
-        BorderPane mainPane = new BorderPane(scrollPane);
-        sportScene = new Scene(mainPane, 500, 450);
+        table.setEditable(true);
         
-        HBox menu = new HBox(10);
-        Region menuSpacer = new Region();
-        HBox.setHgrow(menuSpacer, Priority.ALWAYS);
-        menu.getChildren().addAll(menuSpacer, logoutButton);
+        Label colLabel = new Label("Sports");
+        TableColumn typeCol = new TableColumn("Type");
+        typeCol.setMinWidth(100);
+        typeCol.setCellFactory(new PropertyValueFactory<>("type"));
         
-        logoutButton.setOnAction(e->{
+        TableColumn timeCol = new TableColumn("Time");
+        timeCol.setMinWidth(100);
+        timeCol.setCellFactory(new PropertyValueFactory<>("time"));
+        
+        TableColumn distanceCol = new TableColumn("Distance");
+        distanceCol.setMinWidth(100);
+        distanceCol.setCellFactory(new PropertyValueFactory("distance"));
+        
+        table.setItems(data);
+        table.getColumns().addAll(typeCol, timeCol, distanceCol);
+        
+        TextField addType = new TextField();
+        addType.setPromptText("Type");
+        addType.setMaxWidth(typeCol.getPrefWidth());
+        TextField addTime = new TextField();
+        addTime.setPromptText("Time");
+        addTime.setMaxWidth(timeCol.getPrefWidth());
+        TextField addDistance = new TextField();
+        addDistance.setPromptText("Distance");
+        addDistance.setMaxWidth(distanceCol.getPrefWidth());
+        
+        Button add = new Button("Add");
+        add.setOnAction(e -> {
+            sportService.addSport(addType.getText(), Double.parseDouble(addTime.getText()), Double.parseDouble(addDistance.getText()));
+            data.add(new Sport(addType.getText(), Double.parseDouble(addTime.getText()), Double.parseDouble(addDistance.getText()), sportService.getLoggedUser()));
+            addType.clear();
+            addTime.clear();
+            addDistance.clear();
+        });
+        
+        HBox colHBox = new HBox();
+        colHBox.getChildren().addAll(addType, addTime, addDistance, add);
+        colHBox.setSpacing(3);
+        
+        VBox colVBox = new VBox();
+        colVBox.setSpacing(5);
+        colVBox.setPadding(new Insets(10, 0, 0, 10));
+        colVBox.getChildren().addAll(logoutButton, colLabel, table, colHBox);
+        
+        ((Group) sportScene.getRoot()).getChildren().addAll(colVBox);
+        
+        logoutButton.setOnAction(e-> {
             sportService.logout();
             window.setScene(loginScene);
         });
-        
-        HBox addForm = new HBox(10);
-        Button addSport = new Button("Add");
-        Region addSpacer = new Region();
-        HBox.setHgrow(addSpacer, Priority.ALWAYS);
-        addForm.getChildren().addAll( addSpacer, addSport);
-        
-        sports = new VBox(10);
-        sports.setMaxWidth(300);
-        sports.setMinWidth(300);
-        redrawSportList();
-        
-        scrollPane.setContent(sports);
-        mainPane.setBottom(addForm);
-        mainPane.setTop(menu);
-        
-        addSport.setOnAction(e-> {
-            window.setScene(addSportScene);
-        });
-        
-        VBox newSportPane = new VBox(10);
-        HBox sportTypePane = new HBox(10);
-        Label addSportLabel = new Label ("Here you can add your sport");
-        TextField sportType = new TextField();
-        Label newSportType = new Label("Type: ");
-        sportTypePane.getChildren().addAll(newSportType, sportType);
-        HBox sportTimePane = new HBox(10);
-        TextField sportTime = new TextField();
-        Label newSportTime = new Label("Time: ");
-        sportTimePane.getChildren().addAll(newSportTime, sportTime);
-        HBox sportDistancePane = new HBox(10);
-        TextField sportDistance = new TextField();
-        Label newSportDistance = new Label("Distance: ");
-        sportDistancePane.getChildren().addAll(newSportDistance, sportDistance);
-        Button add = new Button("Add");
-        
-        newSportPane.getChildren().addAll(addSportLabel, sportTypePane, sportTimePane, sportDistancePane, add);
-        
-        add.setOnAction(e->{
-            sportService.addSport(sportType.getText(), Double.parseDouble(sportTime.getText()), Double.parseDouble(sportDistance.getText()));
-            sportType.setText("");
-            sportTime.setText("");
-            sportDistance.setText("");
-            redrawSportList();
-            window.setScene(sportScene);
-        });
-        addSportScene = new Scene(newSportPane, 500, 450);
-        
+       
         window.setTitle("Sports");
         window.setScene(loginScene);
         window.show();
-        window.setOnCloseRequest(e->{
+        window.setOnCloseRequest(e-> {
             System.out.println("This app is about to close");
         });
     

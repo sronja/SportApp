@@ -27,8 +27,7 @@ public class FileSportDao implements SportDao {
             User user = users.getAll().stream().filter(us->us.getUsername().equals(parts[3])).findFirst().orElse(null);
             Sport sport = new Sport(type, time, distance, user);
             sports.add(sport);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             FileWriter writer = new FileWriter(new File(file));
             writer.close();
         }
@@ -45,7 +44,7 @@ public class FileSportDao implements SportDao {
     }
     
     @Override
-    public Sport create(Sport sport) throws Exception{
+    public Sport create(Sport sport) throws Exception {
         sports.add(sport);
         save();
         return sport;

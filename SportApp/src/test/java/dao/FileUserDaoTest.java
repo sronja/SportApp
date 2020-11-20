@@ -18,9 +18,9 @@ import sportapp.dao.UserDao;
 
 /**
  *
- * databaseUserDao-luokan testiluokka
+ * FileUserDao-luokan testiluokka
  */
-public class DatabaseUserDaoTest {
+public class FileUserDaoTest {
     
     @Rule
     public TemporaryFolder temporaryTestFolder = new TemporaryFolder();

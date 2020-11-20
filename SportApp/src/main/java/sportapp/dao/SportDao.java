@@ -9,5 +9,5 @@ public interface SportDao {
     
     Sport create(Sport sport) throws Exception;
     
-    public List<Sport> getAll() ;
+    public List<Sport> getAll();
 }
