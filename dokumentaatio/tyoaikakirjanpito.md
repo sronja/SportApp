@@ -10,4 +10,7 @@ päivä | aika (h) | mitä tein
 13.11.| 1        | --.--
 15.11.| 2        | graafisen suunnittelun aloittaminen
 18.11.| 4        | graafisen suunnittelun jatkaminen ja toiminnallisuuden lisääminen
-yht.  | 17       |
+20.11.| 2        | testien kirjoittaminen
+20.11.| 1        | Checkstyleen tutustuminen ja sen käyttöönotto
+20.11.| 2        | graafista suunnittelua
+yht.  | 2        |
