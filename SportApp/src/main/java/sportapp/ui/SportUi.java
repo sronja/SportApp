@@ -1,7 +1,14 @@
 
 package sportapp.ui;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Collection;
 import java.util.List;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -17,16 +24,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventType;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import sportapp.dao.FileSportDao;
 import sportapp.dao.FileUserDao;
 import sportapp.dao.UserDao;
@@ -60,28 +72,47 @@ public class SportUi extends Application {
         FileUserDao userDao = new FileUserDao(userFile);
         FileSportDao sportDao = new FileSportDao(sportFile, userDao);
         sportService = new SportService(userDao, sportDao);
-
+    
     }
     @Override
     public void start(Stage window) {
         //first scene/login scene
-        BorderPane loginBorderPane = new BorderPane();
-        VBox login = new VBox(10);
-        HBox loginPane = new HBox(10);
-        login.setPadding(new Insets(10));
-        Label loginLabel = new Label("Please login to see and add your sports!");
-        Label usernameLabel = new Label("Username");
-        Label loginMessage = new Label("");
-        TextField usernameField = new TextField();
+        GridPane loginGrid = new GridPane();
+        loginGrid.setAlignment(Pos.CENTER);
+        loginGrid.setHgap(10);
+        loginGrid.setVgap(10);
+        loginGrid.setPadding(new Insets(25, 25, 25, 25));
         
-        loginPane.getChildren().addAll(usernameLabel, usernameField);
+        Label loginLabel = new Label("Please login!");
+        loginLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        loginGrid.add(loginLabel, 0, 0, 2, 1);
+        
+        Label usernameLabel = new Label("Username");
+        loginGrid.add(usernameLabel, 0, 1);
+        TextField usernameField = new TextField();
+        loginGrid.add(usernameField, 1, 1);
+        
+        Label passwordLabel = new Label("Password: ");
+        loginGrid.add(passwordLabel, 0, 2);
+        PasswordField passwordBox = new PasswordField();
+        loginGrid.add(passwordBox, 1, 2);
+        
+        Label loginMessage = new Label("");
+        loginGrid.add(loginMessage, 1, 6);
+        
         Button loginButton = new Button("Login");
         Button signupButton = new Button("Sign up");
+        HBox button = new HBox(10);
+        button.setAlignment(Pos.BOTTOM_RIGHT);
+        button.getChildren().addAll(loginButton, signupButton);
+        loginGrid.add(button, 1, 4);
+                
         loginButton.setOnAction(e-> {
             String username = usernameField.getText();
             if (sportService.login(username)) {
                 window.setScene(sportScene);
                 usernameField.setText("");
+                passwordBox.setText("");
             } else {
                 loginMessage.setText("User " + username + " does not exist!");
                 loginMessage.setTextFill(Color.RED);
@@ -93,30 +124,47 @@ public class SportUi extends Application {
             window.setScene(userScene);
         });
     
-        login.getChildren().addAll(loginLabel, loginPane, loginButton, signupButton, loginMessage);
-        loginBorderPane.setCenter(login);
-        loginScene = new Scene(loginBorderPane, 500, 450);
+        loginScene = new Scene(loginGrid, 500, 450);
         
         // userScene to create new user
         
-        VBox newUser = new VBox(10);
-        HBox newUserPane = new HBox(10);
-        newUserPane.setPadding(new Insets(10));
-        Label newUsernameLabel = new Label();
-        TextField newUsernameField = new TextField();
-        newUserPane.getChildren().addAll(newUsernameLabel, newUsernameField);
         
-        Label createUserMessage = new Label("Enter a username: ");
+        GridPane signupGrid = new GridPane();
+        signupGrid.setAlignment(Pos.CENTER);
+        signupGrid.setHgap(10);
+        signupGrid.setVgap(10);
+        signupGrid.setPadding(new Insets(25, 25, 25, 25));
+        
+        Label signupTitle = new Label("Sign up");
+        signupTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        signupGrid.add(signupTitle, 0, 0, 2, 1);
+        
+        Label nameLabel = new Label("Username:");
+        signupGrid.add(nameLabel, 0, 1);
+        TextField nameField = new TextField();
+        signupGrid.add(nameField, 1, 1);
+        
+        Label pwLabel = new Label("Password:");
+        signupGrid.add(pwLabel, 0, 2);
+        PasswordField pwBox = new PasswordField();
+        signupGrid.add(pwBox, 1, 2);
+       
         Button createUserButton = new Button("Create");
-        createUserButton.setPadding(new Insets(10));
+        HBox buttonHb = new HBox(10);
+        buttonHb.setAlignment(Pos.BOTTOM_RIGHT);
+        buttonHb.getChildren().add(createUserButton);
+        signupGrid.add(buttonHb, 1, 4);
+        
+        Label createUserMessage = new Label("");
+        signupGrid.add(createUserMessage, 1, 6);
         
         createUserButton.setOnAction(e-> {
-            String username = newUsernameField.getText();
-            
-            if (username.length() < 5) {
-                createUserMessage.setText("Username has to have at least 5 characters!");
+            String username = nameField.getText();
+            String password = pwBox.getText();
+            if (username.length() < 5 || password.length() < 8) {
+                createUserMessage.setText("Username has to have at least 5 characters! \n Password has to have at least 8 characters!");
                 createUserMessage.setTextFill(Color.RED);
-            } else if (sportService.createUser(username) == true) {
+            } else if (sportService.createUser(username, password) == true) {
                 createUserMessage.setText("");
                 loginMessage.setText("Creating a new user succeeded.");
                 loginMessage.setTextFill(Color.CORAL);
@@ -127,8 +175,7 @@ public class SportUi extends Application {
             }
         });
         
-        newUser.getChildren().addAll(createUserMessage, newUserPane, createUserButton);
-        userScene = new Scene(newUser, 500, 450);
+        userScene = new Scene(signupGrid, 500, 450);
         
         // main scene
         
@@ -141,15 +188,15 @@ public class SportUi extends Application {
         Label colLabel = new Label("Sports");
         TableColumn typeCol = new TableColumn("Type");
         typeCol.setMinWidth(100);
-        typeCol.setCellFactory(new PropertyValueFactory<>("type"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<Sport, String>("type"));
         
         TableColumn timeCol = new TableColumn("Time");
         timeCol.setMinWidth(100);
-        timeCol.setCellFactory(new PropertyValueFactory<>("time"));
+        timeCol.setCellValueFactory(new PropertyValueFactory<Sport, Double>("time"));
         
         TableColumn distanceCol = new TableColumn("Distance");
         distanceCol.setMinWidth(100);
-        distanceCol.setCellFactory(new PropertyValueFactory("distance"));
+        distanceCol.setCellValueFactory(new PropertyValueFactory<Sport, Double>("distance"));
         
         table.setItems(data);
         table.getColumns().addAll(typeCol, timeCol, distanceCol);
@@ -163,6 +210,7 @@ public class SportUi extends Application {
         TextField addDistance = new TextField();
         addDistance.setPromptText("Distance");
         addDistance.setMaxWidth(distanceCol.getPrefWidth());
+        
         
         Button add = new Button("Add");
         add.setOnAction(e -> {

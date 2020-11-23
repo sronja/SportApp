@@ -46,9 +46,9 @@ public class SportService {
      * @return true jos käyttäjän rekisteröinti onnistuu, jos ei niin false
      */
     
-    public boolean createUser(String username) {
+    public boolean createUser(String username, String password) {
         if (userDao.findByUsername(username) == null) {
-            User user = new User(username);
+            User user = new User(username, password);
             try {
                 userDao.create(user);
             } catch (Exception e) {
