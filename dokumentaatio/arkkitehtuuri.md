@@ -1,1 +1,2 @@
-![Sovelluslogiikka](sovelluslogiikka.png)
+![Sovelluslogiikka](~/sovelluslogiikka.png)
+
