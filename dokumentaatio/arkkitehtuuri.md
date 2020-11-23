@@ -1,2 +1,2 @@
-![image info](/Users/Ronja/Downloads/sovelluslogiikka.png)
+![sovelluslogiikka.png](C:/Users/Ronja/Downloads/sovelluslogiikka.png)
 
