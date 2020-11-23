@@ -14,5 +14,5 @@ päivä | aika (h) | mitä tein
 20.11.| 1        | Checkstyleen tutustuminen ja sen käyttöönotto
 20.11.| 2        | graafista suunnittelua
 23.11.| 4        | koodausta (tai yrittämistä...)
-23.11.| 1        | sovelluslogiikan luokkakaavion piirtäminen
-yht.  | 27       |
+23.11.| 2        | sovelluslogiikan luokkakaavion piirtäminen ja dokumentaation päivitys
+yht.  | 28       |

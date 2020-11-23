@@ -11,20 +11,20 @@ Ainakin aluksi sovelluksella on vain yksi käyttäjärooli eli *normaali käytt�
 
 ### Ennen kirjautumista
 
-* käyttäjä voi luoda järjestelmään käyttäjätunnuksen ja salasanan
-  * käyttäjätunnuksen täytyy olla uniikki ja vähintään 5 merkkiä pitkä
-  * salasanan täytyy olla vähintään 8 merkkiä pitkä
-* käyttäjä voi kirjautua järjestelmään
-  * voimassaoleva käyttäjätunnus ja salasana kirjoitetaan kirjautumislomakkeelle oikeisiin kohtiin
-  * jos käyttäjää ei ole olemassa tai salasana on väärin, niin järjestelmä ilmoittaa siitä
+* käyttäjä voi luoda järjestelmään käyttäjätunnuksen ja salasanan ✓
+  * käyttäjätunnuksen täytyy olla uniikki ja vähintään 5 merkkiä pitkä ✓
+  * salasanan täytyy olla vähintään 8 merkkiä pitkä ✓
+* käyttäjä voi kirjautua järjestelmään ✓
+  * voimassaoleva käyttäjätunnus ja salasana kirjoitetaan kirjautumislomakkeelle oikeisiin kohtiin ✓
+  * jos käyttäjää ei ole olemassa tai salasana on väärin, niin järjestelmä ilmoittaa siitä ✓
 
 ### Kirjautumisen jälkeen
 
 * käyttäjä näkee lisäämänsä liikuntasuoritukset
-* käyttäjä voi lisätä uuden liikuntasuorituksen
-  * vain käyttäjä näkee lisäämänsä liikuntasuorituksen
-  * liikuntasuoritukseen kuuluvat tiedot: laji, matka, aika
-* käyttäjä voi kirjautua ulos järjestelmästä
+* käyttäjä voi lisätä uuden liikuntasuorituksen ✓
+  * vain käyttäjä näkee lisäämänsä liikuntasuorituksen ✓
+  * liikuntasuoritukseen kuuluvat tiedot: laji, matka, aika ✓
+* käyttäjä voi kirjautua ulos järjestelmästä ✓
 
 ### Jatkokehitysideoita
 
