@@ -1,4 +1,4 @@
 ![][1]
 
-[1]: /Users/Ronja/Downloads/sovelluslogiikka.png
+[1]: C:/Users/Ronja/Downloads/sovelluslogiikka.png
 
