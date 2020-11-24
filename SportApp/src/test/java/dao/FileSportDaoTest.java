@@ -66,5 +66,12 @@ public class FileSportDaoTest {
         assertNotEquals(5.0, sport.getDistance(), 0.01);
         assertEquals("maijamallikas", sport.getUser());
     }
+    @Test
+    public void deletingSportsSucceeds() throws Exception {
+        dao.create(new Sport("skiing", 35.0, 6.0, new User("maijamallikas")));
+        dao.delete("maijamallikas");
+        List<Sport> sports = dao.getAll();
+        assertEquals(0, sports.size());
+    }
    
 }

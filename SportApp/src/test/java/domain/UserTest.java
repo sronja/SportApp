@@ -33,6 +33,11 @@ public class UserTest {
         User user2 = new User("mattimajava", "salasana");
         assertFalse(user.equals(user2));
     }
+    @Test 
+    public void notEqualWhenDifferentPassword() {
+        User user2 = new User("maijamallikas", "elamaonihanaa");
+        assertFalse(user.equals(user2));
+    }
     @Test
     public void notEqualWhenDifferentType() {
         Object object = new Object();

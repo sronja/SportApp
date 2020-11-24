@@ -31,10 +31,11 @@ public class User {
             return false;
         }
         User other = (User) object;
-        if (this.username.equals(other.username) && this.password == other.password) {
+        if (this.username.equals(other.username) && this.password.equals(other.password)) {
             return true;
         }
         return false;
     }
     
 }
+

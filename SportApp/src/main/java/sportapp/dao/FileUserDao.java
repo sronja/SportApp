@@ -23,15 +23,20 @@ public class FileUserDao implements UserDao {
         try {
             Scanner reader = new Scanner(new File(file));
             while (reader.hasNextLine()) {
-                User u = new User(reader.nextLine());
-                users.add(u);
+                String[] parts = reader.nextLine().split(",");
+                String username = parts[0];
+                String password = parts[1];
+                User user = new User(username, password);
+                users.add(user);
             }
         } catch (Exception e) {
             FileWriter writer = new FileWriter(new File(file));
             writer.close();
         }
     }
-        
+    /*
+    * käyttäjien tallentaminen tiedostoon
+    */
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (User user : users) {
@@ -39,16 +44,26 @@ public class FileUserDao implements UserDao {
             }
         }
     } 
+    /*
+    * uuden käyttäjän luominen ja tallentaminen tiedostoon
+    */
     @Override
     public User create(User user) throws Exception {
         users.add(user);
         save();
         return user;
     }
+    /**
+     * käyttäjät listalla
+     * @return listalla olevat käyttäjät
+     */
     @Override
     public List<User> getAll() {
         return users;
          
+    /**
+     * oikean käyttäjän löytäminen käyttäjänimen perusteella
+     */
     }
     @Override
     public User findByUsername(String username) {
@@ -59,4 +74,31 @@ public class FileUserDao implements UserDao {
                 .orElse(null);
         
     }  
+    /**
+     * oikean käyttäjän löytäminen käyttäjänimen ja salasanan perusteella
+     * @param username
+     * @param password
+     * @return user tai null
+     */
+    @Override
+    public User findByUsernameAndPassword(String username, String password) {
+        for (User user: users) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+            
+        }
+        return null;
+    }
+    @Override
+    public User delete(String username) throws Exception {
+        for (User user: users) {
+            if (user.getUsername().equals(username)) {
+                users.remove(user);
+                save();
+                return user;
+            }
+        }
+        return null;
+    }
 }

@@ -11,4 +11,8 @@ public interface UserDao {
     List<User> getAll();
 
     User findByUsername(String username);
+    
+    User findByUsernameAndPassword(String username, String password);
+    
+    User delete(String username) throws Exception;
 }

@@ -32,6 +32,10 @@ public class FileSportDao implements SportDao {
             writer.close();
         }
     }
+    /**
+     * urheilusuoritusten tallentaminen tiedostoon
+     * @throws Exception 
+     */
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Sport sport: sports) {
@@ -43,17 +47,43 @@ public class FileSportDao implements SportDao {
         return sports.size() + 1;
     }
     
+    /**
+     * urheilusuorituksen lisääminen listalle
+     * @param sport
+     * @return sport urheilusuoritus
+     * @throws Exception 
+     */
     @Override
     public Sport create(Sport sport) throws Exception {
         sports.add(sport);
         save();
         return sport;
     }
-
     
+    /**
+     * kaikkien käyttäjien urheilusuoritusten hakeminen 
+     * @return urheilusuoritukset listana
+     */
     @Override
     public List<Sport> getAll() {
         return sports;
+    }
+    /**
+     * poistettavan käyttäjän urheilusuoritusten poistaminen
+     * @param username
+     * @throws Exception 
+     */
+    @Override
+    public void delete(String username) throws Exception {
+        List removedList = new ArrayList();
+        for (Sport sport: sports) {
+            if (sport.getUser().equals(username)) {
+                removedList.add(sport);
+            }
+        }   
+        sports.removeAll(removedList);
+        save();
+                
     }
     
 }

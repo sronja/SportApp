@@ -30,9 +30,11 @@ import javafx.scene.Node;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -47,7 +49,7 @@ import sportapp.domain.Sport;
 
 /**
  *
- * @author Ronja
+ * Graafinen käyttöliittymä
  */
 public class SportUi extends Application {
 
@@ -56,7 +58,7 @@ public class SportUi extends Application {
     private Scene sportScene;
     private Scene userScene;
     private Scene loginScene;
-    private Scene addSportScene;
+    private Scene settingsScene;
     private TableView<Sport> table = new TableView<>();
     private ObservableList<Sport> data = FXCollections.observableArrayList();
     
@@ -87,12 +89,12 @@ public class SportUi extends Application {
         loginLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         loginGrid.add(loginLabel, 0, 0, 2, 1);
         
-        Label usernameLabel = new Label("Username");
+        Label usernameLabel = new Label("Username:");
         loginGrid.add(usernameLabel, 0, 1);
         TextField usernameField = new TextField();
         loginGrid.add(usernameField, 1, 1);
         
-        Label passwordLabel = new Label("Password: ");
+        Label passwordLabel = new Label("Password:");
         loginGrid.add(passwordLabel, 0, 2);
         PasswordField passwordBox = new PasswordField();
         loginGrid.add(passwordBox, 1, 2);
@@ -109,10 +111,12 @@ public class SportUi extends Application {
                 
         loginButton.setOnAction(e-> {
             String username = usernameField.getText();
-            if (sportService.login(username)) {
+            String password = passwordBox.getText();
+            if (sportService.login(username, password)) {
                 window.setScene(sportScene);
                 usernameField.setText("");
                 passwordBox.setText("");
+                loginMessage.setText("");
             } else {
                 loginMessage.setText("User " + username + " does not exist!");
                 loginMessage.setTextFill(Color.RED);
@@ -127,7 +131,6 @@ public class SportUi extends Application {
         loginScene = new Scene(loginGrid, 500, 450);
         
         // userScene to create new user
-        
         
         GridPane signupGrid = new GridPane();
         signupGrid.setAlignment(Pos.CENTER);
@@ -177,15 +180,18 @@ public class SportUi extends Application {
         
         userScene = new Scene(signupGrid, 500, 450);
         
-        // main scene
+        // main scene, urheilusuoritusten katsominen ja lisääminen (HUOM! tiedot eivät vielä kunnolla tallennu taulukkoon...)
         
         Button logoutButton = new Button("Log out");
+        Button settingsButton = new Button("Settings");
 
         sportScene = new Scene(new Group());
         
         table.setEditable(true);
         
-        Label colLabel = new Label("Sports");
+        Label colLabel = new Label("Your resent sports");
+        colLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        
         TableColumn typeCol = new TableColumn("Type");
         typeCol.setMinWidth(100);
         typeCol.setCellValueFactory(new PropertyValueFactory<Sport, String>("type"));
@@ -211,7 +217,7 @@ public class SportUi extends Application {
         addDistance.setPromptText("Distance");
         addDistance.setMaxWidth(distanceCol.getPrefWidth());
         
-        
+        //Urheilusuorituksen lisääminen taulukkoon nappia painamalla
         Button add = new Button("Add");
         add.setOnAction(e -> {
             sportService.addSport(addType.getText(), Double.parseDouble(addTime.getText()), Double.parseDouble(addDistance.getText()));
@@ -221,20 +227,74 @@ public class SportUi extends Application {
             addDistance.clear();
         });
         
+        Button deleteAll = new Button("Delete all");
+        deleteAll.setOnAction(e -> {
+            if (sportService.deleteSports() == true) {
+                data.clear();
+            }
+        });
+        
         HBox colHBox = new HBox();
         colHBox.getChildren().addAll(addType, addTime, addDistance, add);
         colHBox.setSpacing(3);
         
+        HBox buttons = new HBox();
+        buttons.getChildren().addAll(logoutButton, settingsButton, deleteAll);
+        buttons.setSpacing(3);
+        
         VBox colVBox = new VBox();
         colVBox.setSpacing(5);
         colVBox.setPadding(new Insets(10, 0, 0, 10));
-        colVBox.getChildren().addAll(logoutButton, colLabel, table, colHBox);
+        colVBox.getChildren().addAll(buttons, colLabel, table, colHBox);
         
-        ((Group) sportScene.getRoot()).getChildren().addAll(colVBox);
+        ((Group) sportScene.getRoot()).getChildren().add(colVBox);
         
+        //uloskirjautuminen painamalla logout-nappia
         logoutButton.setOnAction(e-> {
             sportService.logout();
             window.setScene(loginScene);
+        });
+        settingsButton.setOnAction(e-> {
+            window.setScene(settingsScene);
+        });
+        
+        //SettingsScene, käyttäjän poistaminen
+        
+        GridPane settingsGrid = new GridPane();
+        settingsGrid.setAlignment(Pos.CENTER);
+        settingsGrid.setHgap(10);
+        settingsGrid.setVgap(10);
+        settingsGrid.setPadding(new Insets(25, 25, 25, 25));
+        
+        Label settingsLabel = new Label("Settings");
+        settingsLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        settingsGrid.add(settingsLabel, 0, 0, 2, 1);
+        
+        Label backToMainLabel = new Label("Back to sports-page");
+        settingsGrid.add(backToMainLabel, 0, 1);
+        Button backToMain = new Button("Sports");
+        settingsGrid.add(backToMain, 1, 1);
+        
+        Label instruction = new Label("If you want to delete your user, press the following button.");
+        settingsGrid.add(instruction, 0, 2);
+        Button delete = new Button("Delete");
+        settingsGrid.add(delete, 1, 2);
+        
+        Label deleteMessage = new Label("");
+        settingsGrid.add(deleteMessage, 0, 3);
+        
+        settingsScene = new Scene(settingsGrid, 500, 450);
+        
+        delete.setOnAction(e -> {
+            if (sportService.deleteUser() == true) {
+                window.setScene(loginScene);
+                loginMessage.setText("Deleting user succeeded");
+            } else {
+                deleteMessage.setText("There's an error in deleting your user!");
+            }
+        });
+        backToMain.setOnAction(e -> {
+            window.setScene(sportScene);
         });
        
         window.setTitle("Sports");

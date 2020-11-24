@@ -33,7 +33,7 @@ public class FileUserDaoTest {
         userFile = temporaryTestFolder.newFile("usersTestFile.txt");
         
         try (FileWriter testFile = new FileWriter(userFile.getAbsolutePath())) {
-            testFile.write("maijamallikas\n");
+            testFile.write("maijamallikas,salasana\n");
         }
         dao = new FileUserDao(userFile.getAbsolutePath());
     }
@@ -43,6 +43,17 @@ public class FileUserDaoTest {
         User u = dao.findByUsername("maijamallikas");
         assertEquals("maijamallikas", u.getUsername());
         
-        
+    }
+    @Test
+    public void existingUserAndPasswordIsFound() throws Exception {
+        User u = dao.findByUsernameAndPassword("maijamallikas", "salasana");
+        assertEquals("maijamallikas", u.getUsername());
+        assertEquals("salasana", u.getPassword());
+    }
+    @Test 
+    public void deletingUserSucceeds() throws Exception {
+        dao.delete("maijamallikas");
+        User u = dao.findByUsername("maijamallikas");
+        assertEquals(null, u);
     }
 }

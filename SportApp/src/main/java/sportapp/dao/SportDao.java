@@ -1,4 +1,3 @@
-
 package sportapp.dao;
 
 import sportapp.domain.User;
@@ -9,5 +8,8 @@ public interface SportDao {
     
     Sport create(Sport sport) throws Exception;
     
-    public List<Sport> getAll();
+    List<Sport> getAll();
+    
+    void delete(String username) throws Exception;
 }
+

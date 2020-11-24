@@ -21,11 +21,12 @@ public class SportService {
     /**
      * sisäänkirjautuminen
      * @param username
+     * @param password
      * @return true jos käyttäjätunnus on olemassa, jos ei ole niin false
      */
     
-    public boolean login(String username) {
-        User user = userDao.findByUsername(username);
+    public boolean login(String username, String password) {
+        User user = userDao.findByUsernameAndPassword(username, password);
         if (user == null) {
             return false;
         }
@@ -88,5 +89,31 @@ public class SportService {
     
     public User getLoggedUser() {
         return loggedIn;
+    }
+    /**
+     * kirjautuneen käyttäjän poistaminen
+     * @return true jos käyttäjän poistaminen onnistuu, false jos ei
+     */
+    public boolean deleteUser() {
+        try {
+            if (userDao.findByUsername(loggedIn.getUsername()) != null) {
+                userDao.delete(loggedIn.getUsername());
+                sportDao.delete(loggedIn.getUsername());
+                
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+    public boolean deleteSports() {
+        try {
+            if (userDao.findByUsername(loggedIn.getUsername()) != null) {
+                sportDao.delete(loggedIn.getUsername());
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 }
