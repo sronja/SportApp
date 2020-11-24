@@ -1,4 +1,4 @@
-
+package sportapp;
 
 import sportapp.ui.SportUi;
 
@@ -8,3 +8,4 @@ public class Main {
         SportUi.main(args);
     }
 }
+

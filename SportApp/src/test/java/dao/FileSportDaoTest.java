@@ -10,10 +10,10 @@ import static org.junit.Assert.*;
 import org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
-import sportapp.dao.FileSportDao;
-import sportapp.dao.SportDao;
 import domain.FakeUserDao;
 import java.util.List;
+import sportapp.dao.FileSportDao;
+import sportapp.dao.SportDao;
 import sportapp.domain.Sport;
 import sportapp.domain.User;
 

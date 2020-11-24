@@ -3,8 +3,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import sportapp.dao.UserDao;
-import sportapp.domain.User;
+import dao.UserDao;
 /**
  *
  * @author Ronja

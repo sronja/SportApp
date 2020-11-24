@@ -7,14 +7,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import sportapp.domain.User;
+import domain.User;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.io.FileWriter;
 import org.junit.Before;
-import sportapp.dao.FileUserDao;
-import sportapp.dao.UserDao;
 
 /**
  *
