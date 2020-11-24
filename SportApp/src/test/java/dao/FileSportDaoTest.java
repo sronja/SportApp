@@ -16,6 +16,7 @@ import sportapp.dao.FileSportDao;
 import sportapp.dao.SportDao;
 import sportapp.domain.Sport;
 import sportapp.domain.User;
+import sportapp.dao.UserDao;
 
 
 /**
