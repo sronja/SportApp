@@ -15,4 +15,5 @@ päivä | aika (h) | mitä tein
 20.11.| 2        | graafista suunnittelua
 23.11.| 4        | koodausta (tai yrittämistä...)
 23.11.| 2        | sovelluslogiikan luokkakaavion piirtäminen ja dokumentaation päivitys
-yht.  | 28       |
+24.11.| 6        | toiminnallisuuden/graafisuuden lisääminen
+yht.  | 34       |
