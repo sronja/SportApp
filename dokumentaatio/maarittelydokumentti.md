@@ -14,6 +14,7 @@ Ainakin aluksi sovelluksella on vain yksi käyttäjärooli eli *normaali käytt�
 * käyttäjä voi luoda järjestelmään käyttäjätunnuksen ja salasanan ✓
   * käyttäjätunnuksen täytyy olla uniikki ja vähintään 5 merkkiä pitkä ✓
   * salasanan täytyy olla vähintään 8 merkkiä pitkä ✓
+  * lisäksi käyttäjän tulee syöttää järjestelmään etunimi, ikä ja maa ✓
 * käyttäjä voi kirjautua järjestelmään ✓
   * voimassaoleva käyttäjätunnus ja salasana kirjoitetaan kirjautumislomakkeelle oikeisiin kohtiin ✓
   * jos käyttäjää ei ole olemassa tai salasana on väärin, niin järjestelmä ilmoittaa siitä ✓
@@ -32,10 +33,11 @@ Perusversion jälkeen järjestelmään voidaan lisätä esimerkiksi seuraavia to
 
 * yksittäisen liikuntasuorituksen tietojen editointi
 * yksittäisen liikuntasuorituksen poistaminen
+* käyttäjän lisäämien kaikkien liikuntasuoritusten poistaminen ✓ 
 * yhteenvedon näkeminen liikuntasuorituksista
   * esim. käytetty aika, kuljettu matka, kuinka monta kertaa harrastettu tiettyä lajia yms.
 * liikuntasuoritukseen liittyvien tietojen laajentaminen
   * käyttäjä voisi tallentaa myös esim. keskisykkeen ja liikuntasuorituksen jälkeisen fiiliksen asteikolla 1-10
 * *erikoiskäyttäjät* voivat pyytää toisia *erikoiskäyttäjiä* kaverikseen
   * kaverit näkevät toistensa liikuntasuoritukset
-* käyttäjätunnuksen ja siihen liittyvien tietojen poistaminen
+* käyttäjätunnuksen ja siihen liittyvien tietojen poistaminen ✓
