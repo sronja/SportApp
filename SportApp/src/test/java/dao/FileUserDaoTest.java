@@ -33,7 +33,7 @@ public class FileUserDaoTest {
         userFile = temporaryTestFolder.newFile("usersTestFile.txt");
         
         try (FileWriter testFile = new FileWriter(userFile.getAbsolutePath())) {
-            testFile.write("maijamallikas,salasana\n");
+            testFile.write("maijamallikas,salasana,maija,15,suomi\n");
         }
         dao = new FileUserDao(userFile.getAbsolutePath());
     }

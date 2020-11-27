@@ -47,9 +47,21 @@ public class SportService {
      * @return true jos käyttäjän rekisteröinti onnistuu, jos ei niin false
      */
     
-    public boolean createUser(String username, String password) {
+    public boolean createUser(String username, String password, String name, int age, String country) {
         if (userDao.findByUsername(username) == null) {
-            User user = new User(username, password);
+            User user = new User(username, password, name, age, country);
+            try {
+                userDao.create(user);
+            } catch (Exception e) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
+    public boolean setPersonalSettings(String name, int age, String country) {
+        if (userDao.findByUsernameAndPassword(loggedIn.getUsername(), loggedIn.getPassword()) != null) {
+            User user = new User(loggedIn.getUsername(), loggedIn.getPassword(), name, age, country);
             try {
                 userDao.create(user);
             } catch (Exception e) {
@@ -106,6 +118,10 @@ public class SportService {
         }
         return true;
     }
+    /**
+     * kirjautuneen käyttäjän urheilusuoritusten poistaminen
+     * @return true jos onnistuu, jos ei niin false
+     */
     public boolean deleteSports() {
         try {
             if (userDao.findByUsername(loggedIn.getUsername()) != null) {
