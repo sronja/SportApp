@@ -70,9 +70,6 @@ public class SportUi extends Application {
         FileUserDao userDao = new FileUserDao(userFile);
         FileSportDao sportDao = new FileSportDao(sportFile, userDao);
         sportService = new SportService(userDao, sportDao);
-    
-    }
-    public void addDataToTable() {
 
     }
     @Override
@@ -99,7 +96,7 @@ public class SportUi extends Application {
         loginGrid.add(passwordBox, 1, 2);
         
         Label loginMessage = new Label("");
-        loginGrid.add(loginMessage, 1, 6);
+        loginGrid.add(loginMessage, 1, 7);
         
         Button loginButton = new Button("Login");
         Button signupButton = new Button("Sign up");
@@ -113,7 +110,6 @@ public class SportUi extends Application {
             String password = passwordBox.getText();
             if (sportService.login(username, password)) {
                 window.setScene(sportScene);
-                addDataToTable();
                 usernameField.setText("");
                 passwordBox.setText("");
                 loginMessage.setText("");
@@ -124,7 +120,6 @@ public class SportUi extends Application {
         });
         
         signupButton.setOnAction(e-> {
-            usernameField.setText("");
             window.setScene(userScene);
         });
     
@@ -162,7 +157,7 @@ public class SportUi extends Application {
         TextField ageField = new TextField();
         signupGrid.add(ageField, 1, 4);
         
-        Label countryLabel = new Label("Country");
+        Label countryLabel = new Label("Country:");
         signupGrid.add(countryLabel, 0, 5);
         TextField countryField = new TextField();
         signupGrid.add(countryField, 1, 5);
@@ -173,26 +168,40 @@ public class SportUi extends Application {
         buttonHb.getChildren().add(createUserButton);
         signupGrid.add(buttonHb, 1, 6);
         
-        Label createUserMessage = new Label("");
-        signupGrid.add(createUserMessage, 1, 7);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("CAUTION!");
+        alert.setHeaderText(null);
+        alert.setContentText("");
         
         createUserButton.setOnAction(e-> {
+            try {
             String username = nameField.getText();
             String password = pwBox.getText();
             String name = firstNameField.getText();
             int age = Integer.parseInt(ageField.getText());
             String country = countryField.getText();
             if (username.length() < 5 || password.length() < 8) {
-                createUserMessage.setText("Username has to have at least 5 characters! \n Password has to have at least 8 characters!");
-                createUserMessage.setTextFill(Color.RED);
+                alert.setContentText("Username has to have at least 5 characters!\n"
+                        + "Password has to have at least 8 characters!");
+                alert.showAndWait();
             } else if (sportService.createUser(username, password, name, age, country) == true) {
-                createUserMessage.setText("");
                 loginMessage.setText("Creating a new user succeeded.");
                 loginMessage.setTextFill(Color.CORAL);
+                nameField.clear();
+                pwBox.clear();
+                firstNameField.clear();
+                ageField.clear();
+                countryField.clear();
                 window.setScene(loginScene);
-            } else {
-                createUserMessage.setText("Username already exists!");
-                createUserMessage.setTextFill(Color.RED);
+            } else if (sportService.createUser(username, password, name, age, country) == false) {
+                alert.setContentText("Username already exists!");
+                alert.showAndWait();
+            }
+            } catch (Exception exception) {
+                alert.setContentText("You have to insert your data in specific form!\n"
+                        + "Username, password, name & country: characters only\n"
+                        + "Age: integer values only (ie. 50)");
+                alert.showAndWait();
             }
         });
         
@@ -235,14 +244,6 @@ public class SportUi extends Application {
         addDistance.setPromptText("Distance");
         addDistance.setMaxWidth(distanceCol.getPrefWidth());
         
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("CAUTION!");
-        alert.setHeaderText(null);
-        alert.setContentText("You have to insert your data in specific form!\n"
-                + "Type: characters only\n"
-                + "Time: double values only (ie. 30.0)\n"
-                + "Distance: double values only (ie. 5.0)\n");
-        
         //Urheilusuorituksen lisääminen taulukkoon nappia painamalla
         Button add = new Button("Add");
         add.setOnAction(e -> {
@@ -253,6 +254,10 @@ public class SportUi extends Application {
                 addTime.clear();
                 addDistance.clear();
             } catch (Exception ex) {
+                alert.setContentText("You have to insert your data in specific form!\n"
+                + "Type: characters only\n"
+                + "Time: double values only (ie. 30.0)\n"
+                + "Distance: double values only (ie. 5.0)\n");
                 alert.showAndWait();
                 addType.clear();
                 addTime.clear();
