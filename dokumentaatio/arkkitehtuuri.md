@@ -22,7 +22,7 @@ Jos on, niin kirjautuminen onnistuu ja sivu vaihtuu *sportSceneksi* eli sovelluk
 
 Kun käyttäjän rekisteröintinäkymässä on syötetty käyttäjätunnus, joka ei ole kenenkään muun käytössä (väh. 5 merkkiä) sekä salasana (väh. 8 merkkiä), etunimi, ikä ja maa oikeassa muodossa, ja käyttäjä painaa nappia *createUserButton* etenee sovellus seuraavasti:
 
-![Rekisteröinti]
+![Rekisteröinti](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/signUp.png)
 
 Nappia painettaessa tapahtumankäsittelijä kutsuu sovelluslogiikan *sportService* metodia *createUser* ja antaa parametreiksi käyttäjän syöttämät tiedot. 
 *SportService* selvittää *userDao*-luokan metodin *findByUsername* avulla onko käyttäjätunnus jo olemassa. Jos ei, niin sovelluslogiikka luo *User*-olion ja kutsuu *userDao*-luokna metodia *create*, jotta olio voidaan tallentaa.

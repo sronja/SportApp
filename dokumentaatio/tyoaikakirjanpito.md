@@ -18,4 +18,6 @@ päivä | aika (h) | mitä tein
 24.11.| 6        | toiminnallisuuden/graafisuuden lisääminen
 25.11.| 2        | viikon 5 vaatimuksiin tutustuminen ja toiminnallisuuden lisääminen
 27.11.| 4        | koodausta 
-yht.  | 40       |
+28.11.| 1        | Exceptioneiden hallintaa
+28.11.| 1        | 2 sekvenssikaaviota ja arkkitehtuurikuvauksen päivitys
+yht.  | 42       |
