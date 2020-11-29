@@ -101,9 +101,9 @@ public class FileUserDao implements UserDao {
             if (user.getUsername().equals(username)) {
                 users.remove(user);
                 save();
+                return user;
                 
             }
-            return user;
         }
         return null;
     }

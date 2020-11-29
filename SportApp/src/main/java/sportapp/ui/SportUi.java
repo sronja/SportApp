@@ -113,11 +113,17 @@ public class SportUi extends Application {
                 usernameField.setText("");
                 passwordBox.setText("");
                 loginMessage.setText("");
+                for(Sport sport: sportService.getSport()) {
+                    data.add(sport);
+                }
             } else {
                 loginMessage.setText("User " + username + " does not exist!");
                 loginMessage.setTextFill(Color.RED);
             }
         });
+        
+        
+        
         
         signupButton.setOnAction(e-> {
             window.setScene(userScene);
@@ -244,6 +250,7 @@ public class SportUi extends Application {
         addDistance.setPromptText("Distance");
         addDistance.setMaxWidth(distanceCol.getPrefWidth());
         
+        
         //Urheilusuorituksen lisääminen taulukkoon nappia painamalla
         Button add = new Button("Add");
         add.setOnAction(e -> {
@@ -290,6 +297,7 @@ public class SportUi extends Application {
         //uloskirjautuminen painamalla logout-nappia
         logoutButton.setOnAction(e-> {
             sportService.logout();
+            data.clear();
             window.setScene(loginScene);
         });
         settingsButton.setOnAction(e-> {

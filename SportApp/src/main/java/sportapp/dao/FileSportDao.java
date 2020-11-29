@@ -39,7 +39,7 @@ public class FileSportDao implements SportDao {
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Sport sport: sports) {
-                writer.write(sport.getType() + "," + sport.getTime() + "," + sport.getDistance() + "," + sport.getUser()  + "\n");
+                writer.write(sport.getType() + "," + sport.getTime() + "," + sport.getDistance() + "," + sport.getUser().getUsername()  + "\n");
             }
         }
     }
@@ -77,7 +77,7 @@ public class FileSportDao implements SportDao {
     public void delete(String username) throws Exception {
         List removedList = new ArrayList();
         for (Sport sport: sports) {
-            if (sport.getUser().equals(username)) {
+            if (sport.getUser().getUsername().equals(username)) {
                 removedList.add(sport);
             }
         }   

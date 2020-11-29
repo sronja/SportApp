@@ -30,8 +30,8 @@ public class Sport {
     public String getType() {
         return type;
     }
-    public String getUser() {
-        return user.getUsername();
+    public User getUser() {
+        return user;
     }
     public double getTime() {
         return time;
