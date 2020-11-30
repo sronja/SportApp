@@ -18,7 +18,7 @@ Sovellus on tehty harjoitustyönä Helsingin yliopiston Tietojenkäsittelytietee
 
 ## Komentorivitoiminnot
 
-# Testaus
+### Testaus
 
 Testit suoritetaan seuraavalla komennolla
 
@@ -26,11 +26,11 @@ Testit suoritetaan seuraavalla komennolla
 
 Testikattavuusraportti saadan luotua seuraavalla komennolla
 
-> mvn test jacoco report
+> mvn test jacoco:report
 
 Kattavuusraporttia voi tutkia avaamalla selaimella tiedosto *target/site/jacoco/index.html*
 
-# Suoritettava jarin generointi
+### Suoritettava jarin generointi
 
 Komennolla
 
@@ -38,7 +38,7 @@ Komennolla
 
 saadan generoitua jar-tiedosto *SportApp-1.0-SNAPSHOT.jar* *target*-hakemistoon
 
-# Checkstyle
+### Checkstyle
 
 Tiedoston [checkstyle.xml](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/checkstyle.xml) määrittämät tarkistukset saadaan suoritettua komennolla
 
