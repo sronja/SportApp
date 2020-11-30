@@ -13,11 +13,13 @@ päivä | aika (h) | mitä tein
 20.11.| 2        | testien kirjoittaminen
 20.11.| 1        | Checkstyleen tutustuminen ja sen käyttöönotto
 20.11.| 2        | graafista suunnittelua
-23.11.| 4        | koodausta (tai yrittämistä...)
+23.11.| 4        | koodausta
 23.11.| 2        | sovelluslogiikan luokkakaavion piirtäminen ja dokumentaation päivitys
 24.11.| 6        | toiminnallisuuden/graafisuuden lisääminen
 25.11.| 2        | viikon 5 vaatimuksiin tutustuminen ja toiminnallisuuden lisääminen
 27.11.| 4        | koodausta 
 28.11.| 1        | Exceptioneiden hallintaa
 28.11.| 1        | 2 sekvenssikaaviota ja arkkitehtuurikuvauksen päivitys
-yht.  | 42       |
+29.11.| 2        | koodausta
+yht.  | 44       |
+
