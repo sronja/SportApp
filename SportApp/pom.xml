@@ -33,7 +33,6 @@
             <configuration>
                 <excludes>
                     <exclude>sportapp/ui/*</exclude>
-                    <exclude>sportapp/*</exclude>
                 </excludes>
              </configuration>
             <executions>

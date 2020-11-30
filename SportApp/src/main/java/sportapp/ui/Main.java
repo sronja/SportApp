@@ -1,4 +1,4 @@
-package sportapp;
+package sportapp.ui;
 
 import sportapp.ui.SportUi;
 

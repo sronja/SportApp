@@ -19,7 +19,7 @@ public class SportTest {
     
     @Before
     public void setUp() {
-        sport = new Sport("running", 30.0, 5.0, null);
+        sport = new Sport("running", 30.0, 5.0, 150, 10, null);
     }
     @Test
     public void notEqualWhenDifferentType() {
@@ -32,5 +32,7 @@ public class SportTest {
         assertEquals("running", sport.getType());
         assertEquals(30.0, sport.getTime(), 0.01);
         assertEquals(5.0, sport.getDistance(), 0.01);
+        assertEquals(150, sport.getHeartrate());
+        assertEquals(10, sport.getFeeling());
     }
 }

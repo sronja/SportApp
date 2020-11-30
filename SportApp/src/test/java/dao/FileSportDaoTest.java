@@ -38,7 +38,7 @@ public class FileSportDaoTest {
         userDao.create(new User("maijamallikas"));
         
         try (FileWriter testFile = new FileWriter(sportFile.getAbsolutePath())) {
-            testFile.write("running,30.0,5.0,maijamallikas\n");
+            testFile.write("running,30.0,5.0,150,10,maijamallikas\n");
         }
         dao = new FileSportDao(sportFile.getAbsolutePath(), userDao);
     }
@@ -50,11 +50,13 @@ public class FileSportDaoTest {
         assertEquals("running", sport.getType());
         assertEquals(30.0, sport.getTime(), 0.01);
         assertEquals(5.0, sport.getDistance(), 0.01);
-        assertEquals("maijamallikas", sport.getUser());
+        assertEquals(150, sport.getHeartrate());
+        assertEquals(10, sport.getFeeling());
+        assertEquals("maijamallikas", sport.getUser().getUsername());
     }
     @Test
     public void addedSportsAreListed() throws Exception {
-        dao.create(new Sport("skiing", 35.0, 6.0, new User("maijamallikas")));
+        dao.create(new Sport("skiing", 35.0, 6.0, 150, 10, new User("maijamallikas")));
         
         List<Sport> sports = dao.getAll();
         assertEquals(2, sports.size());
@@ -65,11 +67,11 @@ public class FileSportDaoTest {
         assertNotEquals(30.0, sport.getTime(), 0.01);
         assertEquals(6.0, sport.getDistance(), 0.01);
         assertNotEquals(5.0, sport.getDistance(), 0.01);
-        assertEquals("maijamallikas", sport.getUser());
+        assertEquals("maijamallikas", sport.getUser().getUsername());
     }
     @Test
     public void deletingSportsSucceeds() throws Exception {
-        dao.create(new Sport("skiing", 35.0, 6.0, new User("maijamallikas")));
+        dao.create(new Sport("skiing", 35.0, 6.0, 150, 10, new User("maijamallikas")));
         dao.delete("maijamallikas");
         List<Sport> sports = dao.getAll();
         assertEquals(0, sports.size());
