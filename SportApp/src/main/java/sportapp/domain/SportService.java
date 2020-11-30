@@ -76,9 +76,13 @@ public class SportService {
      * @param contentType lisättävän urheilusuorituksen laji
      * @param contentTime lisättävän urheilusuorituksen aika
      * @param contentDistance lisättävän urheilusuorituksen matka
+     * @param contentHeartrate lisättävän urheiusuorituksen keskimääräinen syke
+     * @param contentFeeling lisättävän urheiusuorituksen aikainen fiilis
+     * 
+     * @return true, jos lisäys onnistuu, muuten false
      */
-    public boolean addSport(String contentType, double contentTime, double contentDistance) {
-        Sport sport = new Sport(contentType, contentTime, contentDistance, loggedIn);
+    public boolean addSport(String contentType, double contentTime, double contentDistance, int contentHeartrate, int contentFeeling) {
+        Sport sport = new Sport(contentType, contentTime, contentDistance, contentHeartrate, contentFeeling, loggedIn);
         try {
             sportDao.create(sport);
         } catch (Exception e) {
@@ -86,7 +90,11 @@ public class SportService {
         }
         return true;
     }
-
+    /**
+     * kirjautuneen käyttäjän lisäämien urheilusuoritusten hakeminen tiedostosta
+     * @return kirjautuneen käyttäjän lisäämät urheilusuoritukset
+     */
+    
     public List<Sport> getSport() {
         return sportDao.getAll()
                 .stream()

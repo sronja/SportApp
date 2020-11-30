@@ -28,7 +28,7 @@ public class FileUserDao implements UserDao {
                 String password = parts[1];
                 String name = parts[2];
                 Integer age = Integer.parseInt(parts[3]);
-                String country = parts[3];
+                String country = parts[4];
                 
                 User user = new User(username, password, name, age, country);
                 users.add(user);

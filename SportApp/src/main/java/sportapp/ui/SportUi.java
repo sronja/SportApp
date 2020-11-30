@@ -213,7 +213,7 @@ public class SportUi extends Application {
         
         userScene = new Scene(signupGrid, 500, 450);
         
-        // main scene, urheilusuoritusten katsominen ja lisääminen (HUOM! tiedot eivät vielä kunnolla tallennu taulukkoon...)
+        // main scene, urheilusuoritusten katsominen ja lisääminen
         
         Button logoutButton = new Button("Log out");
         Button settingsButton = new Button("Settings");
@@ -223,7 +223,7 @@ public class SportUi extends Application {
         table.setEditable(true);
         
         Label colLabel = new Label("Your recent sports");
-        colLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        colLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 40));
         
         TableColumn typeCol = new TableColumn("Type");
         typeCol.setMinWidth(100);
@@ -237,8 +237,16 @@ public class SportUi extends Application {
         distanceCol.setMinWidth(100);
         distanceCol.setCellValueFactory(new PropertyValueFactory<Sport, Double>("distance"));
         
+        TableColumn hrCol = new TableColumn("Avg heart rate");
+        hrCol.setMinWidth(100);
+        hrCol.setCellValueFactory(new PropertyValueFactory<Sport, Integer>("heartrate"));
+        
+        TableColumn feelingCol = new TableColumn("Feeling");
+        feelingCol.setMinWidth(100);
+        feelingCol.setCellValueFactory(new PropertyValueFactory<Sport, Integer>("feeling"));
+        
         table.setItems(data);
-        table.getColumns().addAll(typeCol, timeCol, distanceCol);
+        table.getColumns().addAll(typeCol, timeCol, distanceCol, hrCol, feelingCol);
         
         TextField addType = new TextField();
         addType.setPromptText("Type");
@@ -249,26 +257,37 @@ public class SportUi extends Application {
         TextField addDistance = new TextField();
         addDistance.setPromptText("Distance");
         addDistance.setMaxWidth(distanceCol.getPrefWidth());
-        
+        TextField addHeartrate = new TextField();
+        addHeartrate.setPromptText("Heartrate");
+        addHeartrate.setMaxWidth(hrCol.getPrefWidth());
+        TextField addFeeling = new TextField();
+        addFeeling.setPromptText("Feeling 1-10");
+        addFeeling.setMaxWidth(feelingCol.getPrefWidth());
         
         //Urheilusuorituksen lisääminen taulukkoon nappia painamalla
         Button add = new Button("Add");
         add.setOnAction(e -> {
             try {
-                sportService.addSport(addType.getText(), Double.parseDouble(addTime.getText()), Double.parseDouble(addDistance.getText()));
-                data.add(new Sport(addType.getText(), Double.parseDouble(addTime.getText()), Double.parseDouble(addDistance.getText()), sportService.getLoggedUser()));
+                sportService.addSport(addType.getText(), Double.parseDouble(addTime.getText()), Double.parseDouble(addDistance.getText()), Integer.parseInt(addHeartrate.getText()), Integer.parseInt(addFeeling.getText()));
+                data.add(new Sport(addType.getText(), Double.parseDouble(addTime.getText()), Double.parseDouble(addDistance.getText()), Integer.parseInt(addHeartrate.getText()), Integer.parseInt(addFeeling.getText()), sportService.getLoggedUser()));
                 addType.clear();
                 addTime.clear();
                 addDistance.clear();
+                addHeartrate.clear();
+                addFeeling.clear();
             } catch (Exception ex) {
                 alert.setContentText("You have to insert your data in specific form!\n"
                 + "Type: characters only\n"
                 + "Time: double values only (ie. 30.0)\n"
-                + "Distance: double values only (ie. 5.0)\n");
+                + "Distance: double values only (ie. 5.0)\n"
+                + "Heartrate: integer values only (ie. 150)\n"
+                + "Feeling: integer values onlu between 1 to 10");
                 alert.showAndWait();
                 addType.clear();
                 addTime.clear();
                 addDistance.clear();
+                addHeartrate.clear();
+                addFeeling.clear();
             }
         });
         
@@ -280,19 +299,25 @@ public class SportUi extends Application {
         });
         
         HBox colHBox = new HBox();
-        colHBox.getChildren().addAll(addType, addTime, addDistance, add);
-        colHBox.setSpacing(3);
+        colHBox.getChildren().addAll(addType, addTime, addDistance, addHeartrate, addFeeling);
+        colHBox.setSpacing(20);
         
-        HBox buttons = new HBox();
+        VBox buttons = new VBox();
         buttons.getChildren().addAll(logoutButton, settingsButton, deleteAll);
-        buttons.setSpacing(3);
+        buttons.setSpacing(10);
         
-        VBox colVBox = new VBox();
-        colVBox.setSpacing(5);
-        colVBox.setPadding(new Insets(10, 0, 0, 10));
-        colVBox.getChildren().addAll(buttons, colLabel, table, colHBox);
+        GridPane pane = new GridPane();
+        pane.setAlignment(Pos.CENTER);
+        pane.setHgap(10);
+        pane.setVgap(10);
+        pane.setPadding(new Insets(25, 25, 25, 25));
+        pane.add(colLabel, 0, 0);
+        pane.add(table, 0, 1);
+        pane.add(colHBox, 0, 2);
+        pane.add(add, 0, 3);
+        pane.add(buttons, 1, 1);
         
-        ((Group) sportScene.getRoot()).getChildren().add(colVBox);
+        ((Group) sportScene.getRoot()).getChildren().add(pane);
         
         //uloskirjautuminen painamalla logout-nappia
         logoutButton.setOnAction(e-> {

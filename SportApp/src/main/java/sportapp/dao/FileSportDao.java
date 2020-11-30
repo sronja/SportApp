@@ -24,8 +24,10 @@ public class FileSportDao implements SportDao {
             String type = parts[0];
             Double time = Double.parseDouble(parts[1]);
             Double distance = Double.parseDouble(parts[2]);
-            User user = users.getAll().stream().filter(us->us.getUsername().equals(parts[3])).findFirst().orElse(null);
-            Sport sport = new Sport(type, time, distance, user);
+            Integer heartrate = Integer.parseInt(parts[3]);
+            Integer feeling = Integer.parseInt(parts[4]);
+            User user = users.getAll().stream().filter(us->us.getUsername().equals(parts[5])).findFirst().orElse(null);
+            Sport sport = new Sport(type, time, distance, heartrate, feeling, user);
             sports.add(sport);
         } catch (Exception e) {
             FileWriter writer = new FileWriter(new File(file));
@@ -39,7 +41,7 @@ public class FileSportDao implements SportDao {
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Sport sport: sports) {
-                writer.write(sport.getType() + "," + sport.getTime() + "," + sport.getDistance() + "," + sport.getUser().getUsername()  + "\n");
+                writer.write(sport.getType() + "," + sport.getTime() + "," + sport.getDistance() + "," + sport.getHeartrate() + "," + sport.getFeeling() + "," + sport.getUser().getUsername() + "\n");
             }
         }
     }

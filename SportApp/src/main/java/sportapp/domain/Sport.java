@@ -12,14 +12,17 @@ public class Sport {
     private double time;
     private double distance;
     private User user;
-   
-    public Sport(String type, double time, double distance, User user) {
+    private int heartrate;
+    private int feeling;
+    
+    public Sport(String type, double time, double distance, int heartrate, int feeling, User user) {
         this.id = id;
         this.type = type;
         this.time = time;
         this.distance = distance;
+        this.heartrate = heartrate;
+        this.feeling = feeling;
         this.user = user;
-   
     }
     public void setId(int id) {
         this.id = id;
@@ -38,6 +41,12 @@ public class Sport {
     }
     public double getDistance() {
         return distance;
+    }
+    public int getHeartrate() {
+        return heartrate;
+    }
+    public int getFeeling() {
+        return feeling;
     }
     @Override
     public boolean equals(Object object) {
