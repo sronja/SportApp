@@ -222,7 +222,7 @@ public class SportUi extends Application {
         
         table.setEditable(true);
         
-        Label colLabel = new Label("Your resent sports");
+        Label colLabel = new Label("Your recent sports");
         colLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         
         TableColumn typeCol = new TableColumn("Type");
