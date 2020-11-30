@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import sportapp.dao.UserDao;
 import sportapp.dao.SportDao;
+import  org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 /**
  * Sovelluslogiikasta vastaava luokka
  */
@@ -140,4 +141,16 @@ public class SportService {
         }
         return true;
     }
+    public double countMeanDistance() {
+        DescriptiveStatistics stats = new DescriptiveStatistics();
+        for (Sport sport: getSport()) {
+            if (getSport().size() < 1) {
+                return 0.0;
+            }
+            stats.addValue(sport.getDistance());
+        }
+        return stats.getMean();
+        
+    }
+    
 }

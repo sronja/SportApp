@@ -20,15 +20,18 @@ public class FileSportDao implements SportDao {
         
         try {
             Scanner reader = new Scanner(new File(file));
-            String[] parts = reader.nextLine().split(",");
-            String type = parts[0];
-            Double time = Double.parseDouble(parts[1]);
-            Double distance = Double.parseDouble(parts[2]);
-            Integer heartrate = Integer.parseInt(parts[3]);
-            Integer feeling = Integer.parseInt(parts[4]);
-            User user = users.getAll().stream().filter(us->us.getUsername().equals(parts[5])).findFirst().orElse(null);
-            Sport sport = new Sport(type, time, distance, heartrate, feeling, user);
-            sports.add(sport);
+            while (reader.hasNextLine()) {
+                String[] parts = reader.nextLine().split(",");
+                int id = Integer.parseInt(parts[0]);
+                String type = parts[1];
+                Double time = Double.parseDouble(parts[2]);
+                Double distance = Double.parseDouble(parts[3]);
+                Integer heartrate = Integer.parseInt(parts[4]);
+                Integer feeling = Integer.parseInt(parts[5]);
+                User user = users.getAll().stream().filter(us->us.getUsername().equals(parts[6])).findFirst().orElse(null);
+                Sport sport = new Sport(id, type, time, distance, heartrate, feeling, user);
+                sports.add(sport);
+            }
         } catch (Exception e) {
             FileWriter writer = new FileWriter(new File(file));
             writer.close();
@@ -41,7 +44,7 @@ public class FileSportDao implements SportDao {
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (Sport sport: sports) {
-                writer.write(sport.getType() + "," + sport.getTime() + "," + sport.getDistance() + "," + sport.getHeartrate() + "," + sport.getFeeling() + "," + sport.getUser().getUsername() + "\n");
+                writer.write(sport.getId() + "," + sport.getType() + "," + sport.getTime() + "," + sport.getDistance() + "," + sport.getHeartrate() + "," + sport.getFeeling() + "," + sport.getUser().getUsername() + "\n");
             }
         }
     }
@@ -57,6 +60,7 @@ public class FileSportDao implements SportDao {
      */
     @Override
     public Sport create(Sport sport) throws Exception {
+        sport.setId(newId());
         sports.add(sport);
         save();
         return sport;

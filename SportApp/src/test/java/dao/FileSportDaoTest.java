@@ -38,7 +38,7 @@ public class FileSportDaoTest {
         userDao.create(new User("maijamallikas"));
         
         try (FileWriter testFile = new FileWriter(sportFile.getAbsolutePath())) {
-            testFile.write("running,30.0,5.0,150,10,maijamallikas\n");
+            testFile.write("1,running,30.0,5.0,150,10,maijamallikas\n");
         }
         dao = new FileSportDao(sportFile.getAbsolutePath(), userDao);
     }

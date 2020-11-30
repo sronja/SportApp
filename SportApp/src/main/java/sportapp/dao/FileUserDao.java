@@ -95,6 +95,12 @@ public class FileUserDao implements UserDao {
         }
         return null;
     }
+    /**
+     * käyttäjän poistaminen tiedostosta
+     * @param username
+     * @return käyttäjä, jos poisto onnistuu, muuten null
+     * @throws Exception 
+     */
     @Override
     public User delete(String username) throws Exception {
         for (User user: users) {

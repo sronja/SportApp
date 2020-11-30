@@ -57,6 +57,7 @@ public class SportUi extends Application {
     private Scene errorScene;
     private TableView<Sport> table = new TableView<>();
     private ObservableList<Sport> data = FXCollections.observableArrayList();
+    private Label meanDistanceLabel = new Label("");
     
     @Override
     public void init() throws Exception {
@@ -104,7 +105,8 @@ public class SportUi extends Application {
         button.setAlignment(Pos.BOTTOM_RIGHT);
         button.getChildren().addAll(loginButton, signupButton);
         loginGrid.add(button, 1, 4);
-                
+        
+        
         loginButton.setOnAction(e-> {
             String username = usernameField.getText();
             String password = passwordBox.getText();
@@ -113,6 +115,7 @@ public class SportUi extends Application {
                 usernameField.setText("");
                 passwordBox.setText("");
                 loginMessage.setText("");
+                meanDistanceLabel.setText("Mean distance: " + sportService.countMeanDistance());
                 for(Sport sport: sportService.getSport()) {
                     data.add(sport);
                 }
@@ -275,6 +278,7 @@ public class SportUi extends Application {
                 addDistance.clear();
                 addHeartrate.clear();
                 addFeeling.clear();
+                meanDistanceLabel.setText("Mean distance: " + sportService.countMeanDistance());
             } catch (Exception ex) {
                 alert.setContentText("You have to insert your data in specific form!\n"
                 + "Type: characters only\n"
@@ -306,6 +310,7 @@ public class SportUi extends Application {
         buttons.getChildren().addAll(logoutButton, settingsButton, deleteAll);
         buttons.setSpacing(10);
         
+        
         GridPane pane = new GridPane();
         pane.setAlignment(Pos.CENTER);
         pane.setHgap(10);
@@ -316,7 +321,8 @@ public class SportUi extends Application {
         pane.add(colHBox, 0, 2);
         pane.add(add, 0, 3);
         pane.add(buttons, 1, 1);
-        
+        pane.add(meanDistanceLabel, 0, 4);
+                
         ((Group) sportScene.getRoot()).getChildren().add(pane);
         
         //uloskirjautuminen painamalla logout-nappia

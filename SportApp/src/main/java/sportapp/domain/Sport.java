@@ -15,8 +15,16 @@ public class Sport {
     private int heartrate;
     private int feeling;
     
-    public Sport(String type, double time, double distance, int heartrate, int feeling, User user) {
+    public Sport(int id, String type, double time, double distance, int heartrate, int feeling, User user) {
         this.id = id;
+        this.type = type;
+        this.time = time;
+        this.distance = distance;
+        this.heartrate = heartrate;
+        this.feeling = feeling;
+        this.user = user;
+    }
+    public Sport(String type, double time, double distance, int heartrate, int feeling, User user) {
         this.type = type;
         this.time = time;
         this.distance = distance;
