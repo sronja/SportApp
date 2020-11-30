@@ -21,7 +21,7 @@ Ainakin aluksi sovelluksella on vain yksi käyttäjärooli eli *normaali käytt�
 
 ### Kirjautumisen jälkeen
 
-* käyttäjä näkee lisäämänsä liikuntasuoritukset
+* käyttäjä näkee lisäämänsä liikuntasuoritukset ✓
 * käyttäjä voi lisätä uuden liikuntasuorituksen ✓
   * vain käyttäjä näkee lisäämänsä liikuntasuorituksen ✓
   * liikuntasuoritukseen kuuluvat tiedot: laji, matka, aika ✓
@@ -36,7 +36,7 @@ Perusversion jälkeen järjestelmään voidaan lisätä esimerkiksi seuraavia to
 * käyttäjän lisäämien kaikkien liikuntasuoritusten poistaminen ✓ 
 * yhteenvedon näkeminen liikuntasuorituksista
   * esim. käytetty aika, kuljettu matka, kuinka monta kertaa harrastettu tiettyä lajia yms.
-* liikuntasuoritukseen liittyvien tietojen laajentaminen
+* liikuntasuoritukseen liittyvien tietojen laajentaminen ✓
   * käyttäjä voisi tallentaa myös esim. keskisykkeen ja liikuntasuorituksen jälkeisen fiiliksen asteikolla 1-10
 * *erikoiskäyttäjät* voivat pyytää toisia *erikoiskäyttäjiä* kaverikseen
   * kaverit näkevät toistensa liikuntasuoritukset
