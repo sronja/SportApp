@@ -21,5 +21,6 @@ päivä | aika (h) | mitä tein
 28.11.| 1        | Exceptioneiden hallintaa
 28.11.| 1        | 2 sekvenssikaaviota ja arkkitehtuurikuvauksen päivitys
 29.11.| 2        | koodausta
-yht.  | 44       |
+30.11.| 6        | koodausta, ulkoisen kirjaston käyttöönotto, README.md:n päivittäminen yms.
+yht.  | 50       |
 
