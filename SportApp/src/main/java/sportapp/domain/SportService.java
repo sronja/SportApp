@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import sportapp.dao.UserDao;
 import sportapp.dao.SportDao;
-import  org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 /**
  * Sovelluslogiikasta vastaava luokka
  */
@@ -141,7 +141,26 @@ public class SportService {
         }
         return true;
     }
+    /**
+     * käyttäjän lisäämien urheilusuoritusten keskimääräisen matkan laskeminen
+     * @return matkan keskiarvo
+     */
     public double countMeanDistance() {
+        DescriptiveStatistics stats = new DescriptiveStatistics();
+        if (getSport().isEmpty()) {
+                return 0.0;
+        }
+        for (Sport sport: getSport()) {
+            stats.addValue(sport.getDistance());
+        }
+        return stats.getMean();
+        
+    }
+    /**
+     * käyttäjän lisäämien urheilusuoritusten matkan yhteispituuden laskeminen
+     * @return matkojen summa
+     */
+    public double countSumDistance() {
         DescriptiveStatistics stats = new DescriptiveStatistics();
         for (Sport sport: getSport()) {
             if (getSport().size() < 1) {
@@ -149,8 +168,21 @@ public class SportService {
             }
             stats.addValue(sport.getDistance());
         }
-        return stats.getMean();
-        
+        return stats.getSum();
+    }
+    /**
+     * käyttäjän lisäämiin urheilusuorituksiin käytetyn ajan summan laskeminen
+     * @return aikojen summa
+     */
+    public double countSumTime() {
+        DescriptiveStatistics stats = new DescriptiveStatistics();
+        for (Sport sport: getSport()) {
+            if (getSport().size() < 1) {
+                return 0.0;
+            }
+            stats.addValue(sport.getTime());
+        }
+        return stats.getSum();
     }
     
 }

@@ -58,6 +58,8 @@ public class SportUi extends Application {
     private TableView<Sport> table = new TableView<>();
     private ObservableList<Sport> data = FXCollections.observableArrayList();
     private Label meanDistanceLabel = new Label("");
+    private Label sumDistanceLabel = new Label("");
+    private Label sumTimeLabel = new Label("");
     
     @Override
     public void init() throws Exception {
@@ -72,6 +74,11 @@ public class SportUi extends Application {
         FileSportDao sportDao = new FileSportDao(sportFile, userDao);
         sportService = new SportService(userDao, sportDao);
 
+    }
+    public void refreshStatisticsLabels() {
+        meanDistanceLabel.setText("Mean distance: " + sportService.countMeanDistance() + " km");
+        sumDistanceLabel.setText("Total length: " + sportService.countSumDistance() + " km");
+        sumTimeLabel.setText("Total time: " + sportService.countSumTime() + " min");
     }
     @Override
     public void start(Stage window) {
@@ -115,7 +122,7 @@ public class SportUi extends Application {
                 usernameField.setText("");
                 passwordBox.setText("");
                 loginMessage.setText("");
-                meanDistanceLabel.setText("Mean distance: " + sportService.countMeanDistance());
+                refreshStatisticsLabels();
                 for(Sport sport: sportService.getSport()) {
                     data.add(sport);
                 }
@@ -261,7 +268,7 @@ public class SportUi extends Application {
         addDistance.setPromptText("Distance");
         addDistance.setMaxWidth(distanceCol.getPrefWidth());
         TextField addHeartrate = new TextField();
-        addHeartrate.setPromptText("Heartrate");
+        addHeartrate.setPromptText("Heart rate");
         addHeartrate.setMaxWidth(hrCol.getPrefWidth());
         TextField addFeeling = new TextField();
         addFeeling.setPromptText("Feeling 1-10");
@@ -278,14 +285,14 @@ public class SportUi extends Application {
                 addDistance.clear();
                 addHeartrate.clear();
                 addFeeling.clear();
-                meanDistanceLabel.setText("Mean distance: " + sportService.countMeanDistance());
+                refreshStatisticsLabels();
             } catch (Exception ex) {
                 alert.setContentText("You have to insert your data in specific form!\n"
                 + "Type: characters only\n"
                 + "Time: double values only (ie. 30.0)\n"
                 + "Distance: double values only (ie. 5.0)\n"
-                + "Heartrate: integer values only (ie. 150)\n"
-                + "Feeling: integer values onlu between 1 to 10");
+                + "Heartrate: integer values only between 40 to 220 (ie. 150)\n"
+                + "Feeling: integer values only between 1 to 10");
                 alert.showAndWait();
                 addType.clear();
                 addTime.clear();
@@ -298,6 +305,7 @@ public class SportUi extends Application {
         Button deleteAll = new Button("Delete all");
         deleteAll.setOnAction(e -> {
             if (sportService.deleteSports() == true) {
+                refreshStatisticsLabels();
                 data.clear();
             }
         });
@@ -310,6 +318,9 @@ public class SportUi extends Application {
         buttons.getChildren().addAll(logoutButton, settingsButton, deleteAll);
         buttons.setSpacing(10);
         
+        meanDistanceLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
+        sumDistanceLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
+        sumTimeLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         
         GridPane pane = new GridPane();
         pane.setAlignment(Pos.CENTER);
@@ -322,6 +333,8 @@ public class SportUi extends Application {
         pane.add(add, 0, 3);
         pane.add(buttons, 1, 1);
         pane.add(meanDistanceLabel, 0, 4);
+        pane.add(sumDistanceLabel, 0, 5);
+        pane.add(sumTimeLabel, 0, 6);
                 
         ((Group) sportScene.getRoot()).getChildren().add(pane);
         
@@ -376,7 +389,7 @@ public class SportUi extends Application {
         
     
        
-        window.setTitle("Sports");
+        window.setTitle("SportApp");
         window.setScene(loginScene);
         window.show();
         window.setOnCloseRequest(e-> {
