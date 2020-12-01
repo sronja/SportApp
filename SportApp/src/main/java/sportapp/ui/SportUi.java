@@ -123,7 +123,7 @@ public class SportUi extends Application {
                 passwordBox.setText("");
                 loginMessage.setText("");
                 refreshStatisticsLabels();
-                for(Sport sport: sportService.getSport()) {
+                for (Sport sport: sportService.getSport()) {
                     data.add(sport);
                 }
             } else {
@@ -191,28 +191,27 @@ public class SportUi extends Application {
         
         createUserButton.setOnAction(e-> {
             try {
-            String username = nameField.getText();
-            String password = pwBox.getText();
-            String name = firstNameField.getText();
-            int age = Integer.parseInt(ageField.getText());
-            String country = countryField.getText();
-            if (username.length() < 5 || password.length() < 8) {
-                alert.setContentText("Username has to have at least 5 characters!\n"
-                        + "Password has to have at least 8 characters!");
-                alert.showAndWait();
-            } else if (sportService.createUser(username, password, name, age, country) == true) {
-                loginMessage.setText("Creating a new user succeeded.");
-                loginMessage.setTextFill(Color.CORAL);
-                nameField.clear();
-                pwBox.clear();
-                firstNameField.clear();
-                ageField.clear();
-                countryField.clear();
-                window.setScene(loginScene);
-            } else if (sportService.createUser(username, password, name, age, country) == false) {
-                alert.setContentText("Username already exists!");
-                alert.showAndWait();
-            }
+                String username = nameField.getText();
+                String password = pwBox.getText();
+                String name = firstNameField.getText();
+                int age = Integer.parseInt(ageField.getText());
+                String country = countryField.getText();
+                if (username.length() < 5 || password.length() < 8) {
+                    alert.setContentText("Username has to have at least 5 characters!\n" + "Password has to have at least 8 characters!");
+                    alert.showAndWait();
+                } else if (sportService.createUser(username, password, name, age, country) == true) {
+                    loginMessage.setText("Creating a new user succeeded.");
+                    loginMessage.setTextFill(Color.CORAL);
+                    nameField.clear();
+                    pwBox.clear();
+                    firstNameField.clear();
+                    ageField.clear();
+                    countryField.clear();
+                    window.setScene(loginScene);
+                } else if (sportService.createUser(username, password, name, age, country) == false) {
+                    alert.setContentText("Username already exists!");
+                    alert.showAndWait();
+                }
             } catch (Exception exception) {
                 alert.setContentText("You have to insert your data in specific form!\n"
                         + "Username, password, name & country: characters only\n"
@@ -288,11 +287,11 @@ public class SportUi extends Application {
                 refreshStatisticsLabels();
             } catch (Exception ex) {
                 alert.setContentText("You have to insert your data in specific form!\n"
-                + "Type: characters only\n"
-                + "Time: double values only (ie. 30.0)\n"
-                + "Distance: double values only (ie. 5.0)\n"
-                + "Heartrate: integer values only between 40 to 220 (ie. 150)\n"
-                + "Feeling: integer values only between 1 to 10");
+                    + "Type: characters only\n"
+                    + "Time: double values only (ie. 30.0)\n"
+                    + "Distance: double values only (ie. 5.0)\n"
+                    + "Heartrate: integer values only between 40 to 220 (ie. 150)\n"
+                    + "Feeling: integer values only between 1 to 10");
                 alert.showAndWait();
                 addType.clear();
                 addTime.clear();

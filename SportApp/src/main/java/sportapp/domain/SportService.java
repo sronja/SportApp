@@ -148,7 +148,7 @@ public class SportService {
     public double countMeanDistance() {
         DescriptiveStatistics stats = new DescriptiveStatistics();
         if (getSport().isEmpty()) {
-                return 0.0;
+            return 0.0;
         }
         for (Sport sport: getSport()) {
             stats.addValue(sport.getDistance());

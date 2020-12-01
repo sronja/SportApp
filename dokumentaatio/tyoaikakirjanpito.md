@@ -22,5 +22,6 @@ päivä | aika (h) | mitä tein
 28.11.| 1        | 2 sekvenssikaaviota ja arkkitehtuurikuvauksen päivitys
 29.11.| 2        | koodausta
 30.11.| 6        | koodausta, ulkoisen kirjaston käyttöönotto, README.md:n päivittäminen yms.
-yht.  | 50       |
+1.12. | 3        | statistiikan lisäys, virheiden korjausta
+yht.  | 52       |
 
