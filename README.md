@@ -15,6 +15,7 @@ Sovellus on tehty harjoitustyönä Helsingin yliopiston Tietojenkäsittelytietee
 
 ## Releaset
 
+[Viikko 5](https://github.com/sronja/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Komentorivitoiminnot
 
