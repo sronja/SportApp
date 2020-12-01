@@ -34,7 +34,7 @@ Perusversion jälkeen järjestelmään voidaan lisätä esimerkiksi seuraavia to
 * yksittäisen liikuntasuorituksen tietojen editointi
 * yksittäisen liikuntasuorituksen poistaminen
 * käyttäjän lisäämien kaikkien liikuntasuoritusten poistaminen ✓ 
-* yhteenvedon näkeminen liikuntasuorituksista
+* yhteenvedon näkeminen liikuntasuorituksista ✓
   * esim. käytetty aika, kuljettu matka, kuinka monta kertaa harrastettu tiettyä lajia yms.
 * liikuntasuoritukseen liittyvien tietojen laajentaminen ✓
   * käyttäjä voisi tallentaa myös esim. keskisykkeen ja liikuntasuorituksen jälkeisen fiiliksen asteikolla 1-10
