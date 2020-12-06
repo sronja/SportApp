@@ -23,5 +23,6 @@ päivä | aika (h) | mitä tein
 29.11.| 2        | koodausta
 30.11.| 6        | koodausta, ulkoisen kirjaston käyttöönotto, README.md:n päivittäminen yms.
 1.12. | 3        | statistiikan lisäys, virheiden korjausta
-yht.  | 52       |
+6.12. | 5        | testikattavuuden lisääminen, javadocin kirjoittaminen, yksittäisen liikuntasuorituksen poistomahdollisuuden lisäys yms.
+yht.  | 57       |
 
