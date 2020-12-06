@@ -62,6 +62,9 @@ public class SportUi extends Application {
     private Label sumTimeLabel = new Label("");
     
     @Override
+    /**
+     * alustus
+     */
     public void init() throws Exception {
         Properties properties = new Properties();
         
@@ -75,6 +78,10 @@ public class SportUi extends Application {
         sportService = new SportService(userDao, sportDao);
 
     }
+    /**
+     * kuljettuun matkaan ja käytettyyn aikaan liittyvän tilastotiedon päivittäminen
+     * asettaa tilastolabeleihin uudet arvot
+     */
     public void refreshStatisticsLabels() {
         meanDistanceLabel.setText("Mean distance: " + sportService.countMeanDistance() + " km");
         sumDistanceLabel.setText("Total length: " + sportService.countSumDistance() + " km");

@@ -137,11 +137,11 @@ public class SportService {
     
     /**
      * kirjautuneen käyttäjän tietyn urheilusuorituksen poistaminen
-     * @param type
-     * @param time
-     * @param distance
-     * @param heartrate
-     * @param feeling
+     * @param type tyyppi
+     * @param time aika
+     * @param distance matka
+     * @param heartrate keskisyke
+     * @param feeling fiilis
      * @return true jos onnistuu, muuten false
      */
     public boolean deleteSport(String type, double time, double distance, int heartrate, int feeling) {

@@ -1,4 +1,4 @@
-/*
+/**
  * Käyttöliittymä
  */
 package sportapp.ui;
