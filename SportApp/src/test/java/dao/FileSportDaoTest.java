@@ -76,5 +76,16 @@ public class FileSportDaoTest {
         List<Sport> sports = dao.getAll();
         assertEquals(0, sports.size());
     }
+    @Test
+    public void deletingSpecificSportSucceeds() throws Exception {
+        dao.create(new Sport("skiing", 35.0, 6.0, 150, 10, new User("maijamallikas")));
+        dao.create(new Sport("skiing", 50.0, 8.0, 140, 8, new User("maijamallikas")));
+        dao.deleteSpecific("skiing", 35.0, 6.0, 150, 10, "maijamallikas");
+        List<Sport> sports = dao.getAll();
+        assertEquals(2, sports.size());
+        Sport sport = sports.get(1);
+        assertEquals(8, sport.getFeeling());
+        assertNotEquals(35.0, sport.getTime());
+    }
    
 }

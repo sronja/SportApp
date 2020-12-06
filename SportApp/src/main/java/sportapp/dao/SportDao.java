@@ -11,5 +11,7 @@ public interface SportDao {
     List<Sport> getAll();
     
     void delete(String username) throws Exception;
+    
+    void deleteSpecific(String type, double time, double distance, int heartrate, int feeling, String username) throws Exception;
 }
 

@@ -10,7 +10,7 @@ import sportapp.domain.User;
 
 /**
  *
- * @author Ronja
+ * 
  */
 
 public class FileUserDao implements UserDao {

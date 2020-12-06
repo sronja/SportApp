@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 import sportapp.dao.UserDao;
 import sportapp.dao.SportDao;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
 /**
  * Sovelluslogiikasta vastaava luokka
  */
+
 public class SportService {
     private UserDao userDao;
     private SportDao sportDao;
@@ -19,13 +21,13 @@ public class SportService {
         this.sportDao = sportDao;
        
     }
+    
     /**
      * sisäänkirjautuminen
      * @param username
      * @param password
      * @return true jos käyttäjätunnus on olemassa, jos ei ole niin false
      */
-    
     public boolean login(String username, String password) {
         User user = userDao.findByUsernameAndPassword(username, password);
         if (user == null) {
@@ -34,35 +36,23 @@ public class SportService {
         loggedIn = user;
         return true;
     }
+    
     /**
      * uloskirjautuminen
      */
-    
     public void logout() {
         loggedIn = null;
     }
+    
     /**
      * uuden käyttäjän rekisteröinti
      * @param username käyttäjätunnus
      * 
      * @return true jos käyttäjän rekisteröinti onnistuu, jos ei niin false
      */
-    
     public boolean createUser(String username, String password, String name, int age, String country) {
         if (userDao.findByUsername(username) == null) {
             User user = new User(username, password, name, age, country);
-            try {
-                userDao.create(user);
-            } catch (Exception e) {
-                return false;
-            }
-            return true;
-        }
-        return false;
-    }
-    public boolean setPersonalSettings(String name, int age, String country) {
-        if (userDao.findByUsernameAndPassword(loggedIn.getUsername(), loggedIn.getPassword()) != null) {
-            User user = new User(loggedIn.getUsername(), loggedIn.getPassword(), name, age, country);
             try {
                 userDao.create(user);
             } catch (Exception e) {
@@ -91,26 +81,27 @@ public class SportService {
         }
         return true;
     }
+    
     /**
      * kirjautuneen käyttäjän lisäämien urheilusuoritusten hakeminen tiedostosta
      * @return kirjautuneen käyttäjän lisäämät urheilusuoritukset
      */
-    
     public List<Sport> getSport() {
         return sportDao.getAll()
                 .stream()
                 .filter(u -> u.getUser().equals(loggedIn))
                 .collect(Collectors.toList());
     }
+    
     /**
      * kirjautunut käyttäjä
      * 
      * @return kirjautunut käyttäjä
      */
-    
     public User getLoggedUser() {
         return loggedIn;
     }
+    
     /**
      * kirjautuneen käyttäjän poistaminen
      * @return true jos käyttäjän poistaminen onnistuu, false jos ei
@@ -127,6 +118,7 @@ public class SportService {
         }
         return true;
     }
+    
     /**
      * kirjautuneen käyttäjän urheilusuoritusten poistaminen
      * @return true jos onnistuu, jos ei niin false
@@ -141,6 +133,30 @@ public class SportService {
         }
         return true;
     }
+    
+    /**
+     * kirjautuneen käyttäjän tietyn urheilusuorituksen poistaminen
+     * @param type
+     * @param time
+     * @param distance
+     * @param heartrate
+     * @param feeling
+     * @return true jos onnistuu, muuten false
+     * @throws Exception 
+     */
+    public boolean deleteSport(String type, double time, double distance, int heartrate, int feeling) {
+        try {
+            if (userDao.findByUsername(loggedIn.getUsername()) != null) {
+                sportDao.deleteSpecific(type, time, distance, heartrate, feeling, loggedIn.getUsername());
+                return true;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+
+    return false;
+}      
+    
     /**
      * käyttäjän lisäämien urheilusuoritusten keskimääräisen matkan laskeminen
      * @return matkan keskiarvo
@@ -156,6 +172,7 @@ public class SportService {
         return stats.getMean();
         
     }
+    
     /**
      * käyttäjän lisäämien urheilusuoritusten matkan yhteispituuden laskeminen
      * @return matkojen summa
@@ -170,6 +187,7 @@ public class SportService {
         }
         return stats.getSum();
     }
+    
     /**
      * käyttäjän lisäämiin urheilusuorituksiin käytetyn ajan summan laskeminen
      * @return aikojen summa

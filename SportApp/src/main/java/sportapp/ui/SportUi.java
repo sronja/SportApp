@@ -308,13 +308,20 @@ public class SportUi extends Application {
                 data.clear();
             }
         });
+        Button deleteOne = new Button("Delete selected");
+        deleteOne.setOnAction(e -> {
+            Sport selected = table.getSelectionModel().getSelectedItem();
+                if (sportService.deleteSport(selected.getType(), selected.getTime(), selected.getDistance(), selected.getHeartrate(), selected.getFeeling()) == true) {
+                    table.getItems().remove(selected);    
+            }
+        }) ;
         
         HBox colHBox = new HBox();
         colHBox.getChildren().addAll(addType, addTime, addDistance, addHeartrate, addFeeling);
         colHBox.setSpacing(20);
         
         VBox buttons = new VBox();
-        buttons.getChildren().addAll(logoutButton, settingsButton, deleteAll);
+        buttons.getChildren().addAll(logoutButton, settingsButton, deleteAll, deleteOne);
         buttons.setSpacing(10);
         
         meanDistanceLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));

@@ -13,10 +13,10 @@ public class FakeUserDao implements UserDao {
     List<User> users = new ArrayList<>();
 
     public FakeUserDao() {
-        users.add(new User("maijamallikas"));
+        
     }
     @Override
-    public User create(User user) throws Exception {
+    public User create(User user) {
         users.add(user);
         return(user);
     }
@@ -42,7 +42,7 @@ public class FakeUserDao implements UserDao {
         return null;
     }
     @Override
-    public User delete(String username) throws Exception{
+    public User delete(String username) throws Exception {
         for (User user: users) {
             if (user.getUsername().equals(username)) {
                 users.remove(user);

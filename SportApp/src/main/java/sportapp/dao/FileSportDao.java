@@ -91,5 +91,23 @@ public class FileSportDao implements SportDao {
         save();
                 
     }
-    
+    /**
+     * tietyn urheilusuorituksen poistaminen tiedostosta
+     * @param type
+     * @param time
+     * @param distance
+     * @param heartrate
+     * @param feeling
+     * @param username
+     * @throws Exception 
+     */
+    @Override
+    public void deleteSpecific(String type, double time, double distance, int heartrate, int feeling, String username) throws Exception {
+        for (Sport sport: sports) {
+            if (sport.getType().equals(type) && sport.getTime() == time && sport.getDistance() == distance && sport.getHeartrate() == heartrate && sport.getFeeling() == feeling && sport.getUser().getUsername().equals(username)) {
+                sports.remove(sport);
+            }
+        }
+        save();
+    }
 }
