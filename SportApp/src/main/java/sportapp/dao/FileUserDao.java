@@ -68,6 +68,7 @@ public class FileUserDao implements UserDao {
          
     /**
      * oikean käyttäjän löytäminen käyttäjänimen perusteella
+     * @return käyttäjä
      */
     }
     @Override
@@ -81,9 +82,9 @@ public class FileUserDao implements UserDao {
     }  
     /**
      * oikean käyttäjän löytäminen käyttäjänimen ja salasanan perusteella
-     * @param username
-     * @param password
-     * @return user tai null
+     * @param username käyttäjänimi
+     * @param password salasana
+     * @return user tai null, jos käyttäjää ei löytynyt
      */
     @Override
     public User findByUsernameAndPassword(String username, String password) {
@@ -97,7 +98,7 @@ public class FileUserDao implements UserDao {
     }
     /**
      * käyttäjän poistaminen tiedostosta
-     * @param username
+     * @param username käyttäjänimi
      * @return käyttäjä, jos poisto onnistuu, muuten null
      * @throws Exception 
      */

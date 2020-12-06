@@ -24,8 +24,8 @@ public class SportService {
     
     /**
      * sisäänkirjautuminen
-     * @param username
-     * @param password
+     * @param username käyttäjänimi
+     * @param password salasana
      * @return true jos käyttäjätunnus on olemassa, jos ei ole niin false
      */
     public boolean login(String username, String password) {
@@ -46,8 +46,11 @@ public class SportService {
     
     /**
      * uuden käyttäjän rekisteröinti
-     * @param username käyttäjätunnus
-     * 
+     * @param username käyttäjänimi
+     * @param password salasana
+     * @param name etunimi
+     * @param age ikä
+     * @param country maa
      * @return true jos käyttäjän rekisteröinti onnistuu, jos ei niin false
      */
     public boolean createUser(String username, String password, String name, int age, String country) {
@@ -69,7 +72,6 @@ public class SportService {
      * @param contentDistance lisättävän urheilusuorituksen matka
      * @param contentHeartrate lisättävän urheiusuorituksen keskimääräinen syke
      * @param contentFeeling lisättävän urheiusuorituksen aikainen fiilis
-     * 
      * @return true, jos lisäys onnistuu, muuten false
      */
     public boolean addSport(String contentType, double contentTime, double contentDistance, int contentHeartrate, int contentFeeling) {
@@ -95,7 +97,6 @@ public class SportService {
     
     /**
      * kirjautunut käyttäjä
-     * 
      * @return kirjautunut käyttäjä
      */
     public User getLoggedUser() {
@@ -142,7 +143,6 @@ public class SportService {
      * @param heartrate
      * @param feeling
      * @return true jos onnistuu, muuten false
-     * @throws Exception 
      */
     public boolean deleteSport(String type, double time, double distance, int heartrate, int feeling) {
         try {

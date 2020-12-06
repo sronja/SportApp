@@ -86,4 +86,14 @@ public class SportServiceTest {
         assertEquals(1, sports.size());
         assertEquals("skiing", sports.get(0).getType());
     }
+    
+    @Test
+    public void creatingSportSucceeds() {
+        sportService.addSport("running", 50.0, 8.0, 155, 9);
+        assertEquals(2, sportService.getSport().size());
+        assertEquals(155, sportService.getSport().get(1).getHeartrate());
+    }
+   
+
+    
 }

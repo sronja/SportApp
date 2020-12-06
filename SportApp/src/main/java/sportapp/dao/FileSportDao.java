@@ -48,13 +48,17 @@ public class FileSportDao implements SportDao {
             }
         }
     }
+    /**
+     * uuden id:n luominen urheilusuoritukselle
+     * @return uusi id (listan koko + 1)
+     */
     private int newId() {
         return sports.size() + 1;
     }
     
     /**
      * urheilusuorituksen lisääminen listalle
-     * @param sport
+     * @param sport urheilusuoritus
      * @return sport urheilusuoritus
      * @throws Exception 
      */
@@ -76,7 +80,7 @@ public class FileSportDao implements SportDao {
     }
     /**
      * poistettavan käyttäjän urheilusuoritusten poistaminen
-     * @param username
+     * @param username käyttäjänimi
      * @throws Exception 
      */
     @Override
@@ -93,12 +97,12 @@ public class FileSportDao implements SportDao {
     }
     /**
      * tietyn urheilusuorituksen poistaminen tiedostosta
-     * @param type
-     * @param time
-     * @param distance
-     * @param heartrate
-     * @param feeling
-     * @param username
+     * @param type tyyppi
+     * @param time aika
+     * @param distance matka
+     * @param heartrate keskisyke
+     * @param feeling fiilis
+     * @param username käyttäjänimi
      * @throws Exception 
      */
     @Override
