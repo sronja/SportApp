@@ -39,6 +39,14 @@ Komennolla
 
 saadan generoitua jar-tiedosto *SportApp-1.0-SNAPSHOT.jar* *target*-hakemistoon
 
+### JavaDoc
+
+Komennolla
+
+> mvn javadoc:javadoc
+
+saadaan generoitua JavaDoc. Sen tarkastelu onnistuu avaamalla selaimella tiedosto *target/site/apidocs/index.html*
+
 ### Checkstyle
 
 Tiedoston [checkstyle.xml](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/checkstyle.xml) määrittämät tarkistukset saadaan suoritettua komennolla
