@@ -31,13 +31,10 @@ Ainakin aluksi sovelluksella on vain yksi käyttäjärooli eli *normaali käytt�
 
 Perusversion jälkeen järjestelmään voidaan lisätä esimerkiksi seuraavia toiminnallisuuksia
 
-* yksittäisen liikuntasuorituksen tietojen editointi
-* yksittäisen liikuntasuorituksen poistaminen
+* yksittäisen liikuntasuorituksen poistaminen ✓
 * käyttäjän lisäämien kaikkien liikuntasuoritusten poistaminen ✓ 
 * yhteenvedon näkeminen liikuntasuorituksista ✓
   * esim. käytetty aika, kuljettu matka, kuinka monta kertaa harrastettu tiettyä lajia yms.
 * liikuntasuoritukseen liittyvien tietojen laajentaminen ✓
   * käyttäjä voisi tallentaa myös esim. keskisykkeen ja liikuntasuorituksen jälkeisen fiiliksen asteikolla 1-10
-* *erikoiskäyttäjät* voivat pyytää toisia *erikoiskäyttäjiä* kaverikseen
-  * kaverit näkevät toistensa liikuntasuoritukset
 * käyttäjätunnuksen ja siihen liittyvien tietojen poistaminen ✓
