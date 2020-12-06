@@ -154,8 +154,8 @@ public class SportService {
             return false;
         }
 
-    return false;
-}      
+        return false;
+    }      
     
     /**
      * käyttäjän lisäämien urheilusuoritusten keskimääräisen matkan laskeminen

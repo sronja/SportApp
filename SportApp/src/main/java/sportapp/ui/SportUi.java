@@ -318,10 +318,10 @@ public class SportUi extends Application {
         Button deleteOne = new Button("Delete selected");
         deleteOne.setOnAction(e -> {
             Sport selected = table.getSelectionModel().getSelectedItem();
-                if (sportService.deleteSport(selected.getType(), selected.getTime(), selected.getDistance(), selected.getHeartrate(), selected.getFeeling()) == true) {
-                    table.getItems().remove(selected);    
+            if (sportService.deleteSport(selected.getType(), selected.getTime(), selected.getDistance(), selected.getHeartrate(), selected.getFeeling()) == true) {
+                table.getItems().remove(selected);    
             }
-        }) ;
+        });
         
         HBox colHBox = new HBox();
         colHBox.getChildren().addAll(addType, addTime, addDistance, addHeartrate, addFeeling);
