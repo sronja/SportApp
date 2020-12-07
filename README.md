@@ -7,11 +7,13 @@ Sovellus on tehty harjoitustyönä Helsingin yliopiston Tietojenkäsittelytietee
 
 ## Dokumentaatio 
 
+[Arkkitehtuurikuvaus](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
+
+[Käyttöohje](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kayttoohje.md)
+
 [Vaatimusmäärittely](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/maarittelydokumentti.md)
 
 [Työaikakirjanpito](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/tyoaikakirjanpito.md)
-
-[Arkkitehtuurikuvaus](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/arkkitehtuuri.md)
 
 ## Releaset
 
