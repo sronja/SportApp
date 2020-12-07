@@ -20,9 +20,44 @@ Käyttöliittymä on toteutettu luokkaan sportapp.ui.SportUi. SportUi ei lähtö
 
 # Sovelluslogiikka
 
+Luokka User kuvaa sovelluksen käyttäjiä ja luokka Sport käyttäjien urheilusuorituksia.
+
+![Pääluokat](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/pääluokat.png)
+
+Toiminnallisuudesta vastaa luokka SportService, joka sisältää koodin käyttöliittymän toiminnoille. Se saa tarvitsemansa tiedon käyttäjistä ja urheilusuorituksista *sportapp.dao*-pakkauksessa sijaitsevien luokkien, jotka toteuttavat rajapinnat *SportDao* ja *UserDao*, kautta. 
+Metodeja ovat esimerkiksi:
+
+* boolean createUser(String username, String password, String name, int age, String country)
+* boolean addSport(String contentType, double contentTime, double contentDistance, int contentHeartrate, int contentFeeling)
+* double countMeanDistance()
+* List<Sport> getSport()
+
 SportApp-ohjelman osien suhdetta kuvaava luokka/pakkauskkaavio:
 
-![Sovelluslogiikka](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/sovelluslogiikka.png)
+![Sovelluslogiikka](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumen$
+
+# Tietojen pysyväistallennus
+
+Pakkaus *sportapp.dao* sisältää luokat *FileSportDao* ja *FileUserDao*, jotka sisältävät koodin tiedon pysyväistallennukseen. Sovelluslogiikka käyttää luokkiia rajapintojen *SportDao* ja *UserDao* kautta.
+
+## Tiedostot
+
+Tiedot talletetaan kahteen eri tiedostoon, joiden nimet on määritetty sovelluksen juureen sijoitetussa konfiguraatiotiedostossa *config.properties*.
+Käyttäjiin liittyvä tieto talletetaan omaan tiedostoon ja urheilusuorituksiin liittyvä toiseen.
+
+Käyttäjiin liittyvä tieto talletetaan seuraavanalaisesti:
+
+> maijamallikas,salasana,Maija,50,suomi 
+> heikki,salaheikki,Heikki,25,ruotsi
+
+Pilkku siis erottaa käyttäjänimen, salasanan, etunimen, iän ja maan toisistaan.
+
+Urheilusuoritukset tallennetaan samalla tavalla:
+
+> 1,juoksu,60.0,10.0,145,10
+> 2,hiihto,35.0,5.7,124,7
+
+ja tässä siis pilkku erottaa urheilusuorituksen tyypin, ajan, matkan, keskisykkeen ja fiiliksen. 
 
 # Päätoiminnallisuudet
 
