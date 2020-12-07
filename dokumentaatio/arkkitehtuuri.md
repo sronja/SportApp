@@ -1,3 +1,23 @@
+# Rakenne
+
+Ohjelmassa on kolme kerrosta: pakkaus *todoapp.ui* sisältää JavaFX:llä toteutetun graafisen käyttöliittymän, *todoapp.domain* ohjelman sovelluslokiigan ja *todoapp.dao* tietojen pysyväistallennukseen tarvittavan koodin.
+Seuraava pakkauskaavio esittää koodin pakkausrakennetta: 
+
+![Pakkausrakenne](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/pakkauskaavio.png)
+
+# Käyttöliittymä
+
+Sovelluksessa on yhteensä neljä eri sovellusikkunaa. Ne on toteutettu Scene-olioina, joista vain yksi näkyy kerrallaan eli on sijoitettuna stageen. 
+Näkymät ovat:
+
+* kirjautuminen
+* uuden käyttäjän luominen
+* pääsivu, jossa voi lisätä, katsoa ja poistaa urheilusuorituksia ja tutkia urheilusuoritusten tilastotietoa
+* asetussivu
+
+Käyttöliittymä on toteutettu luokkaan sportapp.ui.SportUi. SportUi ei lähtökohtaisesti toteuta sovelluslogiikkaa, vaan se kutsuu sovelluslogiikasta vastaavan *todoService*-luokan metodeja.
+
+
 # Sovelluslogiikka
 
 SportApp-ohjelman osien suhdetta kuvaava luokka/pakkauskkaavio:
