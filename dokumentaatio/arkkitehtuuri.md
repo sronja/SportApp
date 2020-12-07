@@ -34,7 +34,7 @@ Metodeja ovat esimerkiksi:
 
 SportApp-ohjelman osien suhdetta kuvaava luokka/pakkauskkaavio:
 
-![Sovelluslogiikka](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumen$
+![Sovelluslogiikka](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/sovelluslogiikka.png)
 
 # Tietojen pysyväistallennus
 
@@ -48,6 +48,7 @@ Käyttäjiin liittyvä tieto talletetaan omaan tiedostoon ja urheilusuorituksiin
 Käyttäjiin liittyvä tieto talletetaan seuraavanalaisesti:
 
 > maijamallikas,salasana,Maija,50,suomi 
+
 > heikki,salaheikki,Heikki,25,ruotsi
 
 Pilkku siis erottaa käyttäjänimen, salasanan, etunimen, iän ja maan toisistaan.
@@ -55,6 +56,7 @@ Pilkku siis erottaa käyttäjänimen, salasanan, etunimen, iän ja maan toisista
 Urheilusuoritukset tallennetaan samalla tavalla:
 
 > 1,juoksu,60.0,10.0,145,10
+
 > 2,hiihto,35.0,5.7,124,7
 
 ja tässä siis pilkku erottaa urheilusuorituksen tyypin, ajan, matkan, keskisykkeen ja fiiliksen. 
