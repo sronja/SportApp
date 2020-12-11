@@ -15,16 +15,16 @@ Näkymät ovat:
 * pääsivu, jossa voi lisätä, katsoa ja poistaa urheilusuorituksia ja tutkia urheilusuoritusten tilastotietoa
 * asetussivu
 
-Käyttöliittymä on toteutettu luokkaan sportapp.ui.SportUi. SportUi ei lähtökohtaisesti toteuta sovelluslogiikkaa, vaan se kutsuu sovelluslogiikasta vastaavan *todoService*-luokan metodeja.
+Käyttöliittymä on toteutettu luokkaan [sportapp.ui.SportUi](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/ui/SportUi.java). SportUi ei lähtökohtaisesti toteuta sovelluslogiikkaa, vaan se kutsuu sovelluslogiikasta vastaavan *todoService*-luokan metodeja.
 
 
 # Sovelluslogiikka
 
-Luokka User kuvaa sovelluksen käyttäjiä ja luokka Sport käyttäjien urheilusuorituksia.
+Luokka [User](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/domain/User.java) kuvaa sovelluksen käyttäjiä ja luokka [Sport](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/domain/Sport.java) käyttäjien urheilusuorituksia.
 
 ![Pääluokat](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/pääluokat.png)
 
-Toiminnallisuudesta vastaa luokka SportService, joka sisältää koodin käyttöliittymän toiminnoille. Se saa tarvitsemansa tiedon käyttäjistä ja urheilusuorituksista *sportapp.dao*-pakkauksessa sijaitsevien luokkien, jotka toteuttavat rajapinnat *SportDao* ja *UserDao*, kautta. 
+Toiminnallisuudesta vastaa luokka [SportService](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/domain/SportService.java), joka sisältää koodin käyttöliittymän toiminnoille. Se saa tarvitsemansa tiedon käyttäjistä ja urheilusuorituksista *sportapp.dao*-pakkauksessa sijaitsevien luokkien, jotka toteuttavat rajapinnat *SportDao* ja *UserDao*, kautta. 
 Metodeja ovat esimerkiksi:
 
 * boolean createUser(String username, String password, String name, int age, String country)
@@ -38,11 +38,11 @@ SportApp-ohjelman osien suhdetta kuvaava luokka/pakkauskkaavio:
 
 # Tietojen pysyväistallennus
 
-Pakkaus *sportapp.dao* sisältää luokat *FileSportDao* ja *FileUserDao*, jotka sisältävät koodin tiedon pysyväistallennukseen. Sovelluslogiikka käyttää luokkiia rajapintojen *SportDao* ja *UserDao* kautta.
+Pakkaus *sportapp.dao* sisältää luokat [FileSportDao](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/dao/FileSportDao.java) ja [FileUserDao](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/dao/FileUserDao.java), jotka sisältävät koodin tiedon pysyväistallennukseen. Sovelluslogiikka käyttää luokkiia rajapintojen *SportDao* ja *UserDao* kautta.
 
 ## Tiedostot
 
-Tiedot talletetaan kahteen eri tiedostoon, joiden nimet on määritetty sovelluksen juureen sijoitetussa konfiguraatiotiedostossa *config.properties*.
+Tiedot talletetaan kahteen eri tiedostoon, joiden nimet on määritetty sovelluksen juureen sijoitetussa konfiguraatiotiedostossa [config.properties](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/config.properties).
 Käyttäjiin liittyvä tieto talletetaan omaan tiedostoon ja urheilusuorituksiin liittyvä toiseen.
 
 Käyttäjiin liittyvä tieto talletetaan seuraavanalaisesti:
@@ -59,7 +59,7 @@ Urheilusuoritukset tallennetaan samalla tavalla:
 
 > 2,hiihto,35.0,5.7,124,7
 
-ja tässä siis pilkku erottaa urheilusuorituksen tyypin, ajan, matkan, keskisykkeen ja fiiliksen. 
+ja tässä siis pilkku erottaa urheilusuorituksen indeksin, tyypin, ajan, matkan, keskisykkeen ja fiiliksen. 
 
 # Päätoiminnallisuudet
 
@@ -71,8 +71,8 @@ Kun käyttäjä syöttää kirjautumissivun syöttökenttiin oikean käyttäjät
 
 ![Kirjautuminen](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/loggingIn.png)
 
-Nappia painettaessa tapahtumankäsittelijä kutsuu sovelluslogiikan *sportService* metodia login ja antaa parametreiksi käyttäjätunnuksen ja salasanan.
-SportService selvittää *userDao*-luokan metodin findByUserNameAndPassword onko parametreina annetut käyttäjätunnus ja salasana olemassa. 
+Nappia painettaessa tapahtumankäsittelijä kutsuu sovelluslogiikan *sportService* metodia [login](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/domain/SportService.java#L31) ja antaa parametreiksi käyttäjätunnuksen ja salasanan.
+SportService selvittää *userDao*-luokan metodin [findByUserNameAndPassword](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/dao/FileUserDao.java#L90) avulla, onko parametreina annetut käyttäjätunnus ja salasana olemassa. 
 Jos on, niin kirjautuminen onnistuu ja sivu vaihtuu *sportSceneksi* eli sovelluksen varsinaiseksi päänäkymäksi.
 
 **Uuden käyttäjän luominen**
@@ -81,8 +81,8 @@ Kun käyttäjän rekisteröintinäkymässä on syötetty käyttäjätunnus, joka
 
 ![Rekisteröinti](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/signUp.png)
 
-Nappia painettaessa tapahtumankäsittelijä kutsuu sovelluslogiikan *sportService* metodia *createUser* ja antaa parametreiksi käyttäjän syöttämät tiedot. 
-*SportService* selvittää *userDao*-luokan metodin *findByUsername* avulla onko käyttäjätunnus jo olemassa. Jos ei, niin sovelluslogiikka luo *User*-olion ja kutsuu *userDao*-luokna metodia *create*, jotta olio voidaan tallentaa.
+Nappia painettaessa tapahtumankäsittelijä kutsuu sovelluslogiikan *sportService* metodia [createUser](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/domain/SportService.java#L56) ja antaa parametreiksi käyttäjän syöttämät tiedot. 
+*SportService* selvittää *userDao*-luokan metodin [findByUsername](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/dao/FileUserDao.java#L75) avulla onko käyttäjätunnus jo olemassa. Jos ei, niin sovelluslogiikka luo *User*-olion ja kutsuu *userDao*-luokan metodia [create](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/dao/FileUserDao.java#L56), jotta olio voidaan tallentaa.
 Tämän jälkeen käyttöliittymä vaihtaa näkymäksi *loginScenen* eli kirjautumissivun.
 
 **Muut toiminnallisuudet**
