@@ -32,13 +32,13 @@ Metodeja ovat esimerkiksi:
 * double countMeanDistance()
 * List<Sport> getSport()
 
-SportApp-ohjelman osien suhdetta kuvaava luokka/pakkauskkaavio:
+## SportApp-ohjelman osien suhdetta kuvaava luokka/pakkauskkaavio:
 
 ![Sovelluslogiikka](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/sovelluslogiikka.png)
 
 # Tietojen pysyväistallennus
 
-Pakkaus *sportapp.dao* sisältää luokat [FileSportDao](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/dao/FileSportDao.java) ja [FileUserDao](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/dao/FileUserDao.java), jotka sisältävät koodin tiedon pysyväistallennukseen. Sovelluslogiikka käyttää luokkiia rajapintojen *SportDao* ja *UserDao* kautta.
+Pakkaus *sportapp.dao* sisältää luokat [FileSportDao](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/dao/FileSportDao.java) ja [FileUserDao](https://github.com/sronja/ot-harjoitustyo/blob/main/SportApp/src/main/java/sportapp/dao/FileUserDao.java), jotka sisältävät koodin tiedon pysyväistallennukseen. Sovelluslogiikka käyttää luokkia rajapintojen *SportDao* ja *UserDao* kautta.
 
 ## Tiedostot
 
@@ -77,7 +77,7 @@ Jos on, niin kirjautuminen onnistuu ja sivu vaihtuu *sportSceneksi* eli sovelluk
 
 **Uuden käyttäjän luominen**
 
-Kun käyttäjän rekisteröintinäkymässä on syötetty käyttäjätunnus, joka ei ole kenenkään muun käytössä (väh. 5 merkkiä) sekä salasana (väh. 8 merkkiä), etunimi, ikä ja maa oikeassa muodossa, ja käyttäjä painaa nappia *createUserButton* etenee sovellus seuraavasti:
+Kun käyttäjän rekisteröintinäkymässä on syötetty käyttäjätunnus, joka ei ole kenenkään muun käytössä (väh. 5 merkkiä) sekä salasana (väh. 8 merkkiä), etunimi, ikä ja maa oikeassa muodossa, ja käyttäjä painaa nappia *createUserButton*, etenee sovellus seuraavasti:
 
 ![Rekisteröinti](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/signUp.png)
 
