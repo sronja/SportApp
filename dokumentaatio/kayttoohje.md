@@ -1,5 +1,15 @@
 # Käyttöohje
 
+Lataa ensin tiedosto sportApp.jar
+
+## Konfigurointi
+
+Jotta ohjelman suorittaminen onnistuisi, tulee sen käynnistyshakemistossa olla konfiguraatiotiedosto *config.properties*. Siinä määritelläät tiedostot, joihin ohjelma tallettaa tietoa käyttäjistä ja urheilusuorituksista.
+Tiedoston sisälto on seuraava
+
+> userFile=userFile.txt
+> sportFile=sportFile.txt
+
 ## Ohjelman käynnistäminen
 
 Ohjelma käynnistetään komennolla

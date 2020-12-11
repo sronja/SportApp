@@ -93,7 +93,31 @@ public class SportServiceTest {
         assertEquals(2, sportService.getSport().size());
         assertEquals(155, sportService.getSport().get(1).getHeartrate());
     }
-   
-
+    @Test
+    public void creatingUserSucceedsWhenCorrectData() {
+        assertEquals(true, sportService.createUser("ronja", "salaronja", "Ronja", 20, "suomi"));
+        assertEquals(false, sportService.createUser("maijamallikas", "salasana", "Maija", 50, "suomi"));
+    }
+    @Test
+    public void meanDistanceIsCorrect() {
+        sportService.addSport("running", 50.0, 8.0, 155, 9);
+        assertEquals(6.5, sportService.countMeanDistance(), 0.01);
+        sportService.deleteSports();
+        assertEquals(0.0, sportService.countMeanDistance(), 0.01);
+    }
+    @Test
+    public void sumDistanceIsCorrect() {
+        sportService.addSport("running", 50.0, 8.0, 155, 9);
+        assertEquals(13.0, sportService.countSumDistance(), 0.01);
+        sportService.deleteSports();
+        assertEquals(0.0, sportService.countSumDistance(), 0.01);
+    }
+    @Test
+    public void sumTimeIsCorrect() {
+        sportService.addSport("running", 50.0, 8.0, 155, 9);
+        assertEquals(80.0, sportService.countSumTime(), 0.01);
+        sportService.deleteSports();
+        assertEquals(0.0, sportService.countSumTime(), 0.01);
+    }
     
 }

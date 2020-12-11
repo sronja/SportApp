@@ -32,7 +32,7 @@ Metodeja ovat esimerkiksi:
 * double countMeanDistance()
 * List<Sport> getSport()
 
-## SportApp-ohjelman osien suhdetta kuvaava luokka/pakkauskkaavio:
+## SportApp-ohjelman osien suhdetta kuvaava luokka/pakkauskaavio:
 
 ![Sovelluslogiikka](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/sovelluslogiikka.png)
 

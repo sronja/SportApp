@@ -82,10 +82,15 @@ public class SportUi extends Application {
      * kuljettuun matkaan ja käytettyyn aikaan liittyvän tilastotiedon päivittäminen
      * asettaa tilastolabeleihin uudet arvot
      */
-    public void refreshStatisticsLabels() {
+    public void refreshStatisticsAndTableview() {
+        data.clear();
+        for (Sport sport: sportService.getSport()) {
+            data.add(sport);
+        }
         meanDistanceLabel.setText("Mean distance: " + sportService.countMeanDistance() + " km");
         sumDistanceLabel.setText("Total length: " + sportService.countSumDistance() + " km");
         sumTimeLabel.setText("Total time: " + sportService.countSumTime() + " min");
+        
     }
     @Override
     public void start(Stage window) {
@@ -129,18 +134,12 @@ public class SportUi extends Application {
                 usernameField.setText("");
                 passwordBox.setText("");
                 loginMessage.setText("");
-                refreshStatisticsLabels();
-                for (Sport sport: sportService.getSport()) {
-                    data.add(sport);
-                }
+                refreshStatisticsAndTableview();
             } else {
                 loginMessage.setText("User " + username + " does not exist!");
                 loginMessage.setTextFill(Color.RED);
             }
         });
-        
-        
-        
         
         signupButton.setOnAction(e-> {
             window.setScene(userScene);
@@ -285,13 +284,12 @@ public class SportUi extends Application {
         add.setOnAction(e -> {
             try {
                 sportService.addSport(addType.getText(), Double.parseDouble(addTime.getText()), Double.parseDouble(addDistance.getText()), Integer.parseInt(addHeartrate.getText()), Integer.parseInt(addFeeling.getText()));
-                data.add(new Sport(addType.getText(), Double.parseDouble(addTime.getText()), Double.parseDouble(addDistance.getText()), Integer.parseInt(addHeartrate.getText()), Integer.parseInt(addFeeling.getText()), sportService.getLoggedUser()));
                 addType.clear();
                 addTime.clear();
                 addDistance.clear();
                 addHeartrate.clear();
                 addFeeling.clear();
-                refreshStatisticsLabels();
+                refreshStatisticsAndTableview();
             } catch (Exception ex) {
                 alert.setContentText("You have to insert your data in specific form!\n"
                     + "Type: characters only\n"
@@ -311,7 +309,7 @@ public class SportUi extends Application {
         Button deleteAll = new Button("Delete all");
         deleteAll.setOnAction(e -> {
             if (sportService.deleteSports() == true) {
-                refreshStatisticsLabels();
+                refreshStatisticsAndTableview();
                 data.clear();
             }
         });
