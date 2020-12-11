@@ -8,6 +8,7 @@ Jotta ohjelman suorittaminen onnistuisi, tulee sen käynnistyshakemistossa olla 
 Tiedoston sisälto on seuraava
 
 > userFile=userFile.txt
+
 > sportFile=sportFile.txt
 
 ## Ohjelman käynnistäminen
