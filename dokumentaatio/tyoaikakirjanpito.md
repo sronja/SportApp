@@ -25,5 +25,6 @@ päivä | aika (h) | mitä tein
 1.12. | 3        | statistiikan lisäys, virheiden korjausta
 6.12. | 5        | testikattavuuden lisääminen, javadocin kirjoittaminen, yksittäisen liikuntasuorituksen poistomahdollisuuden lisäys yms.
 7.12. | 2        | arkkitehtuurikuvauksen ja käyttöohjeen kirjoittaminen
-yht.  | 59       |
+11.12.| 1        | testien ja dokumentaation kirjoittamista
+yht.  | 60       |
 
