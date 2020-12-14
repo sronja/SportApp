@@ -2,43 +2,32 @@
 package sportapp.ui;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import java.util.Properties;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.*;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import sportapp.dao.FileSportDao;
 import sportapp.dao.FileUserDao;
-import sportapp.dao.UserDao;
 import sportapp.domain.SportService;
 import sportapp.domain.Sport;
 
@@ -49,17 +38,18 @@ import sportapp.domain.Sport;
 public class SportUi extends Application {
 
     private SportService sportService;
-    
     private Scene sportScene;
     private Scene userScene;
     private Scene loginScene;
     private Scene settingsScene;
     private Scene errorScene;
+    private Stage stage;
     private TableView<Sport> table = new TableView<>();
     private ObservableList<Sport> data = FXCollections.observableArrayList();
     private Label meanDistanceLabel = new Label("");
     private Label sumDistanceLabel = new Label("");
     private Label sumTimeLabel = new Label("");
+    private int loginNumber;
     
     @Override
     /**
@@ -76,46 +66,31 @@ public class SportUi extends Application {
         FileUserDao userDao = new FileUserDao(userFile);
         FileSportDao sportDao = new FileSportDao(sportFile, userDao);
         sportService = new SportService(userDao, sportDao);
-
+        loginNumber = 0;
+        createLoginScene();
+        
     }
     /**
-     * kuljettuun matkaan ja käytettyyn aikaan liittyvän tilastotiedon päivittäminen
-     * asettaa tilastolabeleihin uudet arvot
+     * Kirjautumissivun luonti ja sen toiminnot
      */
-    public void refreshStatisticsAndTableview() {
-        data.clear();
-        for (Sport sport: sportService.getSport()) {
-            data.add(sport);
-        }
-        meanDistanceLabel.setText("Mean distance: " + sportService.countMeanDistance() + " km");
-        sumDistanceLabel.setText("Total length: " + sportService.countSumDistance() + " km");
-        sumTimeLabel.setText("Total time: " + sportService.countSumTime() + " min");
-        
-    }
-    @Override
-    public void start(Stage window) {
+    public void createLoginScene() {
         //first scene/login scene
-        GridPane loginGrid = new GridPane();
-        loginGrid.setAlignment(Pos.CENTER);
-        loginGrid.setHgap(10);
-        loginGrid.setVgap(10);
-        loginGrid.setPadding(new Insets(25, 25, 25, 25));
+        GridPane loginGrid = gridpaneMaker();
         
-        Label loginLabel = new Label("Please login!");
-        loginLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        Label loginLabel = labelMaker("Please login!", 20);
         loginGrid.add(loginLabel, 0, 0, 2, 1);
         
-        Label usernameLabel = new Label("Username:");
+        Label usernameLabel = labelMaker("Username:", 12);
         loginGrid.add(usernameLabel, 0, 1);
         TextField usernameField = new TextField();
         loginGrid.add(usernameField, 1, 1);
         
-        Label passwordLabel = new Label("Password:");
+        Label passwordLabel = labelMaker("Password:", 12);
         loginGrid.add(passwordLabel, 0, 2);
         PasswordField passwordBox = new PasswordField();
         loginGrid.add(passwordBox, 1, 2);
         
-        Label loginMessage = new Label("");
+        Label loginMessage = labelMaker("", 12);
         loginGrid.add(loginMessage, 1, 7);
         
         Button loginButton = new Button("Login");
@@ -125,16 +100,24 @@ public class SportUi extends Application {
         button.getChildren().addAll(loginButton, signupButton);
         loginGrid.add(button, 1, 4);
         
-        
         loginButton.setOnAction(e-> {
             String username = usernameField.getText();
             String password = passwordBox.getText();
             if (sportService.login(username, password)) {
-                window.setScene(sportScene);
-                usernameField.setText("");
-                passwordBox.setText("");
-                loginMessage.setText("");
-                refreshStatisticsAndTableview();
+                if (loginNumber == 1) {
+                    stage.setScene(sportScene);
+                    usernameField.setText("");
+                    passwordBox.setText("");
+                    loginMessage.setText("");
+                    refreshStatisticsAndTableview();
+                } else if (loginNumber == 0) {
+                    loginNumber = 1;
+                    stage.setScene(createSportScene());
+                    usernameField.setText("");
+                    passwordBox.setText("");
+                    loginMessage.setText("");
+                    refreshStatisticsAndTableview();
+                }
             } else {
                 loginMessage.setText("User " + username + " does not exist!");
                 loginMessage.setTextFill(Color.RED);
@@ -142,44 +125,42 @@ public class SportUi extends Application {
         });
         
         signupButton.setOnAction(e-> {
-            window.setScene(userScene);
+            stage.setScene(createUserScene());
         });
     
         loginScene = new Scene(loginGrid, 500, 450);
+    }
+    /**
+     * Rekisteröintisivun luonti ja sen toiminnot
+     * @return rekisteröintisivu
+     */
+    public Scene createUserScene() {
+        GridPane signupGrid = gridpaneMaker();
         
-        // userScene to create new user
-        
-        GridPane signupGrid = new GridPane();
-        signupGrid.setAlignment(Pos.CENTER);
-        signupGrid.setHgap(10);
-        signupGrid.setVgap(10);
-        signupGrid.setPadding(new Insets(25, 25, 25, 25));
-        
-        Label signupTitle = new Label("Sign up");
-        signupTitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        Label signupTitle = labelMaker("Sign up", 20);
         signupGrid.add(signupTitle, 0, 0, 2, 1);
         
-        Label nameLabel = new Label("Username:");
+        Label nameLabel = labelMaker("Username:", 12);
         signupGrid.add(nameLabel, 0, 1);
         TextField nameField = new TextField();
         signupGrid.add(nameField, 1, 1);
         
-        Label pwLabel = new Label("Password:");
+        Label pwLabel = labelMaker("Password:", 12);
         signupGrid.add(pwLabel, 0, 2);
         PasswordField pwBox = new PasswordField();
         signupGrid.add(pwBox, 1, 2);
         
-        Label firstName = new Label("Firstname:");
+        Label firstName = labelMaker("Firstname:", 12);
         signupGrid.add(firstName, 0, 3);
         TextField firstNameField = new TextField();
         signupGrid.add(firstNameField, 1, 3);
         
-        Label ageLabel = new Label("Age:");
+        Label ageLabel = labelMaker("Age:", 12);
         signupGrid.add(ageLabel, 0, 4);
         TextField ageField = new TextField();
         signupGrid.add(ageField, 1, 4);
         
-        Label countryLabel = new Label("Country:");
+        Label countryLabel = labelMaker("Country:", 12);
         signupGrid.add(countryLabel, 0, 5);
         TextField countryField = new TextField();
         signupGrid.add(countryField, 1, 5);
@@ -190,11 +171,8 @@ public class SportUi extends Application {
         buttonHb.getChildren().add(createUserButton);
         signupGrid.add(buttonHb, 1, 6);
         
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("CAUTION!");
-        alert.setHeaderText(null);
-        alert.setContentText("");
-        
+        Alert loginAlert = alertMaker();
+
         createUserButton.setOnAction(e-> {
             try {
                 String username = nameField.getText();
@@ -203,33 +181,36 @@ public class SportUi extends Application {
                 int age = Integer.parseInt(ageField.getText());
                 String country = countryField.getText();
                 if (username.length() < 5 || password.length() < 8) {
-                    alert.setContentText("Username has to have at least 5 characters!\n" + "Password has to have at least 8 characters!");
-                    alert.showAndWait();
+                    loginAlert.setContentText("Username has to have at least 5 characters!\n" + "Password has to have at least 8 characters!");
+                    loginAlert.showAndWait();
                 } else if (sportService.createUser(username, password, name, age, country) == true) {
-                    loginMessage.setText("Creating a new user succeeded.");
-                    loginMessage.setTextFill(Color.CORAL);
                     nameField.clear();
                     pwBox.clear();
                     firstNameField.clear();
                     ageField.clear();
                     countryField.clear();
-                    window.setScene(loginScene);
+                    stage.setScene(loginScene);
+                    loginAlert.setContentText("Creating a new user succeeded!");
+                    loginAlert.showAndWait();
                 } else if (sportService.createUser(username, password, name, age, country) == false) {
-                    alert.setContentText("Username already exists!");
-                    alert.showAndWait();
+                    loginAlert.setContentText("Username already exists!");
+                    loginAlert.showAndWait();
                 }
             } catch (Exception exception) {
-                alert.setContentText("You have to insert your data in specific form!\n"
+                loginAlert.setContentText("You have to insert your data in specific form!\n"
                         + "Username, password, name & country: characters only\n"
                         + "Age: integer values only (ie. 50)");
-                alert.showAndWait();
+                loginAlert.showAndWait();
             }
         });
         
-        userScene = new Scene(signupGrid, 500, 450);
-        
-        // main scene, urheilusuoritusten katsominen ja lisääminen
-        
+        return new Scene(signupGrid, 500, 450);
+    }
+    /**
+     * Pääsivun luominen ja sen toiminnot: urheilusuoritusten lisääminen ja katsominen
+     * @return pääsivu
+     */
+    public Scene createSportScene() {
         Button logoutButton = new Button("Log out");
         Button settingsButton = new Button("Settings");
 
@@ -279,6 +260,7 @@ public class SportUi extends Application {
         addFeeling.setPromptText("Feeling 1-10");
         addFeeling.setMaxWidth(feelingCol.getPrefWidth());
         
+        Alert addingSportAlert = alertMaker();
         //Urheilusuorituksen lisääminen taulukkoon nappia painamalla
         Button add = new Button("Add");
         add.setOnAction(e -> {
@@ -291,13 +273,13 @@ public class SportUi extends Application {
                 addFeeling.clear();
                 refreshStatisticsAndTableview();
             } catch (Exception ex) {
-                alert.setContentText("You have to insert your data in specific form!\n"
+                addingSportAlert.setContentText("You have to insert your data in specific form!\n"
                     + "Type: characters only\n"
                     + "Time: double values only (ie. 30.0)\n"
                     + "Distance: double values only (ie. 5.0)\n"
                     + "Heartrate: integer values only between 40 to 220 (ie. 150)\n"
                     + "Feeling: integer values only between 1 to 10");
-                alert.showAndWait();
+                addingSportAlert.showAndWait();
                 addType.clear();
                 addTime.clear();
                 addDistance.clear();
@@ -333,11 +315,7 @@ public class SportUi extends Application {
         sumDistanceLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         sumTimeLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         
-        GridPane pane = new GridPane();
-        pane.setAlignment(Pos.CENTER);
-        pane.setHgap(10);
-        pane.setVgap(10);
-        pane.setPadding(new Insets(25, 25, 25, 25));
+        GridPane pane = gridpaneMaker();
         pane.add(colLabel, 0, 0);
         pane.add(table, 0, 1);
         pane.add(colHBox, 0, 2);
@@ -353,63 +331,116 @@ public class SportUi extends Application {
         logoutButton.setOnAction(e-> {
             sportService.logout();
             data.clear();
-            window.setScene(loginScene);
+            stage.setScene(loginScene);
         });
         settingsButton.setOnAction(e-> {
-            window.setScene(settingsScene);
+            stage.setScene(createSettingsScene());
         });
+        return sportScene;
+    }   
+    /**
+     * Asetussivun luominen ja sen toiminnot
+     * @return asetussivu
+     */
+    public Scene createSettingsScene() {
+        GridPane settingsGrid = gridpaneMaker();
         
-        //SettingsScene, käyttäjän poistaminen ja tietojen lisääminen
-        
-        GridPane settingsGrid = new GridPane();
-        settingsGrid.setAlignment(Pos.CENTER);
-        settingsGrid.setHgap(10);
-        settingsGrid.setVgap(10);
-        settingsGrid.setPadding(new Insets(25, 25, 25, 25));
-        
-        Label settingsLabel = new Label("Settings");
-        settingsLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        Label settingsLabel = labelMaker("Settings", 20);
         settingsGrid.add(settingsLabel, 0, 0, 2, 1);
         
-        Label backToMainLabel = new Label("Back to sports-page");
+        Label backToMainLabel = labelMaker("Back to sports-page", 12);
         settingsGrid.add(backToMainLabel, 0, 1);
         Button backToMain = new Button("Sports");
         settingsGrid.add(backToMain, 1, 1);
         
-        Label instruction = new Label("If you want to delete your user, press the following button.");
+        Label instruction = labelMaker("If you want to delete your user, press the following button.", 12);
         settingsGrid.add(instruction, 0, 2);
         Button delete = new Button("Delete");
         settingsGrid.add(delete, 1, 2);
         
-        Label deleteMessage = new Label("");
+        Label deleteMessage = labelMaker("", 12);
         settingsGrid.add(deleteMessage, 1, 3);
         
         settingsScene = new Scene(settingsGrid, 500, 450);
         
+        Alert deleteAlert = alertMaker();
+        
         delete.setOnAction(e -> {
             if (sportService.deleteUser() == true) {
-                window.setScene(loginScene);
-                loginMessage.setText("Deleting user succeeded");
+                stage.setScene(loginScene);
+                deleteAlert.setContentText("Deleting user succeeded!");
+                deleteAlert.showAndWait();
             } else {
                 deleteMessage.setText("There's an error in deleting your user!");
             }
         });
         backToMain.setOnAction(e -> {
-            window.setScene(sportScene);
+            stage.setScene(sportScene);
         });
-        
-    
-       
-        window.setTitle("SportApp");
-        window.setScene(loginScene);
-        window.show();
-        window.setOnCloseRequest(e-> {
-            System.out.println("This app is about to close");
-        });
-    
+        return settingsScene;
+
     }
+    /**
+     * Yleisen labelin luominen
+     * @param text labelin teksti
+     * @param font labelin fontti
+     * @return label
+     */
+    public Label labelMaker(String text, int font) {
+        Label label = new Label(text);
+        label.setFont(Font.font("Tahoma", FontWeight.NORMAL, font));
+        return label;
+    }
+    /**
+     * Yleisen gridpanen luominen
+     * @return gridpane
+     */
+    public GridPane gridpaneMaker() {
+        GridPane gridpane = new GridPane();
+        gridpane.setAlignment(Pos.CENTER);
+        gridpane.setHgap(10);
+        gridpane.setVgap(10);
+        gridpane.setPadding(new Insets(25, 25, 25, 25));
+        return gridpane;
+    } 
+    /**
+     * Yleisen alertin/varoitusikkunan luominen
+     * @return alert
+     */
+    public Alert alertMaker() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("CAUTION!");
+        alert.setHeaderText(null);
+        alert.setContentText("");
+        return alert;
+    }
+    /**
+     * kuljettuun matkaan ja käytettyyn aikaan liittyvän tilastotiedon päivittäminen
+     * asettaa tilastolabeleihin uudet arvot
+     */
+    public void refreshStatisticsAndTableview() {
+        data.clear();
+        for (Sport sport: sportService.getSport()) {
+            data.add(sport);
+        }
+        meanDistanceLabel.setText("Mean distance: " + sportService.countMeanDistance() + " km");
+        sumDistanceLabel.setText("Total length: " + sportService.countSumDistance() + " km");
+        sumTimeLabel.setText("Total time: " + sportService.countSumTime() + " min");
+    }
+    @Override
+    public void start(Stage stage) {
+        this.stage = stage;
+        stage.setTitle("SportApp");
+        stage.setScene(loginScene);
+        stage.show();
+        
+        Alert closingAlert = alertMaker();
+        stage.setOnCloseRequest(e-> {
+            closingAlert.setContentText("This app is about to close!");
+            closingAlert.showAndWait();
+        });
+    } 
     public static void main(String[] args) {
         launch(args);
     }
-    
 }
