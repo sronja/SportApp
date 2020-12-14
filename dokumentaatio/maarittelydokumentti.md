@@ -11,30 +11,36 @@ Ainakin aluksi sovelluksella on vain yksi käyttäjärooli eli *normaali käytt�
 
 ### Ennen kirjautumista
 
-* käyttäjä voi luoda järjestelmään käyttäjätunnuksen ja salasanan ✓
-  * käyttäjätunnuksen täytyy olla uniikki ja vähintään 5 merkkiä pitkä ✓
-  * salasanan täytyy olla vähintään 8 merkkiä pitkä ✓
-  * lisäksi käyttäjän tulee syöttää järjestelmään etunimi, ikä ja maa ✓
-* käyttäjä voi kirjautua järjestelmään ✓
-  * voimassaoleva käyttäjätunnus ja salasana kirjoitetaan kirjautumislomakkeelle oikeisiin kohtiin ✓
-  * jos käyttäjää ei ole olemassa tai salasana on väärin, niin järjestelmä ilmoittaa siitä ✓
+* käyttäjä voi luoda järjestelmään käyttäjätunnuksen ja salasanan 
+  * käyttäjätunnuksen täytyy olla uniikki ja vähintään 5 merkkiä pitkä
+  * salasanan täytyy olla vähintään 8 merkkiä pitkä 
+  * lisäksi käyttäjän tulee syöttää järjestelmään etunimi, ikä ja maa 
+* käyttäjä voi kirjautua järjestelmään 
+  * voimassaoleva käyttäjätunnus ja salasana kirjoitetaan kirjautumislomakkeelle oikeisiin kohtiin 
+  * jos käyttäjää ei ole olemassa tai salasana on väärin, niin järjestelmä ilmoittaa siitä 
 
 ### Kirjautumisen jälkeen
 
-* käyttäjä näkee lisäämänsä liikuntasuoritukset ✓
-* käyttäjä voi lisätä uuden liikuntasuorituksen ✓
-  * vain käyttäjä näkee lisäämänsä liikuntasuorituksen ✓
-  * liikuntasuoritukseen kuuluvat tiedot: laji, matka, aika ✓
-* käyttäjä voi kirjautua ulos järjestelmästä ✓
+* käyttäjä näkee lisäämänsä liikuntasuoritukset 
+* käyttäjä voi lisätä uuden liikuntasuorituksen 
+  * vain käyttäjä näkee lisäämänsä liikuntasuorituksen 
+  * liikuntasuoritukseen kuuluvat tiedot: laji, matka, aika, keskisyke ja fiilis
+* käyttäjä voi kirjautua ulos järjestelmästä 
+* yksittäisen liikuntasuorituksen poistaminen
+* käyttäjän lisäämien kaikkien liikuntasuoritusten poistaminen
+* yhteenvedon näkeminen liikuntasuorituksista 
+  * käytetty aika, kuljettu matka, kuljetun matkan keskipituus
+* käyttäjätunnuksen ja siihen liittyvien tietojen poistaminen 
 
 ### Jatkokehitysideoita
 
-Perusversion jälkeen järjestelmään voidaan lisätä esimerkiksi seuraavia toiminnallisuuksia
+Perusversion jälkeen järjestelmään voidaan laajentaa esimerkiksi seuraavilla toiminnallisuuksilla
 
-* yksittäisen liikuntasuorituksen poistaminen ✓
-* käyttäjän lisäämien kaikkien liikuntasuoritusten poistaminen ✓ 
-* yhteenvedon näkeminen liikuntasuorituksista ✓
-  * esim. käytetty aika, kuljettu matka, kuinka monta kertaa harrastettu tiettyä lajia yms.
-* liikuntasuoritukseen liittyvien tietojen laajentaminen ✓
-  * käyttäjä voisi tallentaa myös esim. keskisykkeen ja liikuntasuorituksen jälkeisen fiiliksen asteikolla 1-10
-* käyttäjätunnuksen ja siihen liittyvien tietojen poistaminen ✓
+* liikuntasuorituksiin liittyvän yhteenvedon laajentaminen
+  * esim. kuinka monta kertaa harrastettu tiettyä lajia, kuinka monta urheilusuoritusta on yhteensä lisätty
+  * yhteenvedon esittäminen taulukkomuodossa
+* lisätyn urheilusuorituksen muokkaaminen
+* käyttäjän tietojen muokkaaminen
+* käyttäjät voivat pyytää toisia käyttäjiä kavereikseen
+* kaverikäyttäjät voivat tarkistella toistensa urheilusuorituksia
+
