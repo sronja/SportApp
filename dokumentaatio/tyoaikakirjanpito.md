@@ -26,5 +26,6 @@ päivä | aika (h) | mitä tein
 6.12. | 5        | testikattavuuden lisääminen, javadocin kirjoittaminen, yksittäisen liikuntasuorituksen poistomahdollisuuden lisäys yms.
 7.12. | 2        | arkkitehtuurikuvauksen ja käyttöohjeen kirjoittaminen
 11.12.| 1        | testien ja dokumentaation kirjoittamista
-yht.  | 60       |
+14.12.| 3        | SportUi-luokan muokkausta, vaatimusmäärittelyn päivittäminen, testausdokumentin luominen
+yht.  | 63       |
 
