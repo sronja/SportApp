@@ -11,6 +11,8 @@ Sovellus on tehty harjoitustyönä Helsingin yliopiston Tietojenkäsittelytietee
 
 [Käyttöohje](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kayttoohje.md)
 
+[Testausdokumentti](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/testausdokumentti.md)
+
 [Vaatimusmäärittely](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/maarittelydokumentti.md)
 
 [Työaikakirjanpito](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/tyoaikakirjanpito.md)
