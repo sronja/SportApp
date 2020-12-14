@@ -22,6 +22,8 @@ DAO-luokkien testausta varten on testeissä luotu JUnitin TemporaryFolder eli v�
 
 Sovelluksen testauksen rivikattavuus on 93% ja haarautumakattavuus 77%. Testikattavuus ei huomioi käyttöliittymäkerrosta.
 
+![Testikattavuus](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/testauskattavuus.png)
+
 # Järjestelmätestaus
 
 Järjestelmätason testaus on suoritetty manuaalisesti.
