@@ -32,6 +32,8 @@ Metodeja ovat esimerkiksi:
 * double countMeanDistance()
 * List<Sport> getSport()
 
+Sovelluslogiikassa on kolme metodia, jotka käyttävät hyödyksi *Apache commons Math* –kirjaston valmiita metodeja. Ulkoisen kirjaston avulla metodit urheilusuoritusten tilastotiedon laskemiseen on saatu koodattua yksinkertaisesti.
+
 ## SportApp-ohjelman osien suhdetta kuvaava luokka/pakkauskaavio:
 
 ![Sovelluslogiikka](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/sovelluslogiikka.png)

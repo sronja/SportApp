@@ -159,6 +159,7 @@ public class SportService {
     
     /**
      * käyttäjän lisäämien urheilusuoritusten keskimääräisen matkan laskeminen
+     * metodi käyttää Apache Commons Math –kirjaston valmista metodia getMean()
      * @return matkan keskiarvo
      */
     public double countMeanDistance() {
@@ -175,6 +176,7 @@ public class SportService {
     
     /**
      * käyttäjän lisäämien urheilusuoritusten matkan yhteispituuden laskeminen
+     * metodi käyttää Apache Commons Math –kirjaston valmista metodia getSum()
      * @return matkojen summa
      */
     public double countSumDistance() {
@@ -190,6 +192,7 @@ public class SportService {
     
     /**
      * käyttäjän lisäämiin urheilusuorituksiin käytetyn ajan summan laskeminen
+     * metodi käyttää Apache Commons Math –kirjaston valmista metodia getSum()
      * @return aikojen summa
      */
     public double countSumTime() {
@@ -201,6 +204,5 @@ public class SportService {
             stats.addValue(sport.getTime());
         }
         return stats.getSum();
-    }
-    
+    }  
 }

@@ -9,7 +9,7 @@ import java.util.Scanner;
 import sportapp.domain.User;
 
 /**
- *
+ * Käyttäjätietojen pysyväistallennus
  * 
  */
 

@@ -1,7 +1,6 @@
 
 package sportapp.dao;
 
-
 import sportapp.domain.Sport;
 import sportapp.domain.User;
 import java.io.File;
@@ -10,6 +9,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Urheilusuoritusten pysyväistallennus
+ * 
+ */
 public class FileSportDao implements SportDao {
     public List<Sport> sports;
     private String file;

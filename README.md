@@ -1,6 +1,6 @@
 # SportApp
 
-SportApp-sovelluksen päätarkoituksena on mahdollistaa käyttäjille tapa merkitä liikuntasuorituksensa muistiin. 
+SportApp-sovelluksen päätarkoituksena on mahdollistaa käyttäjille tapa merkitä liikuntasuorituksensa muistiin. Käyttäjä voi myös poistaa lisäämiänsä urheilusuorituksia. Lisäksi käyttäjä näkee tilastotietoa lisäämistään urheilusuorituksista. 
 Ensimmäisellä kerralla sovellukseen tulee rekisteröityä keksimällä käyttäjänimi ja salasana. Sovellusta voi käyttää useampi rekisteröitynyt käyttäjä. 
 
 Sovellus on tehty harjoitustyönä Helsingin yliopiston Tietojenkäsittelytieteen Ohjelmistotekniikka-kurssille.

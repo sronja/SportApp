@@ -7,7 +7,7 @@ päivä | aika (h) | mitä tein
 9.11. | 1        | projektin luominen ja tutustuminen ohjelman toteuttamiseen
 10.11.| 2        | koodaamisen aloittaminen
 11.11.| 4        | perustoiminnallisuuden koodaamisen jatkaminen
-13.11.| 1        | --.--
+13.11.| 1        | koodaamista
 15.11.| 2        | graafisen suunnittelun aloittaminen
 18.11.| 4        | graafisen suunnittelun jatkaminen ja toiminnallisuuden lisääminen
 20.11.| 2        | testien kirjoittaminen
@@ -27,5 +27,6 @@ päivä | aika (h) | mitä tein
 7.12. | 2        | arkkitehtuurikuvauksen ja käyttöohjeen kirjoittaminen
 11.12.| 1        | testien ja dokumentaation kirjoittamista
 14.12.| 3        | SportUi-luokan muokkausta, vaatimusmäärittelyn päivittäminen, testausdokumentin luominen
-yht.  | 63       |
+17.12.| 1        | sovelluksen ja dokumentaation viimeistely ja viimeinen testaus, loppupalautus
+yht.  | 65       |
 

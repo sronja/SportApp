@@ -36,7 +36,7 @@ Rekisteröityminen onnistuu syöttämällä vaaditut tiedot kenttiin ja painamal
 
 Kirjautumisen jälkeen avautuu pääsivu, jossa voi lisätä ja poistaa urheilusuorituksia sekä tutkia urheilusuorituksia ja niihin liittyvää tilastotietoa.
 
-!(Pääsivu)[https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/pääsivu.png)
+![Pääsivu](https://github.com/sronja/ot-harjoitustyo/blob/main/dokumentaatio/kuvat/pääsivu.png)
 
 Uuden urheilusuorituksen lisääminen onnistuu syöttämällä urheilusuorituksen tiedot oikeassa muodossa syöttökenttiin ja painamalla sitten nappia *add*.
 Kaikki urheilusuoritukset voi poistaa painamalla nappia *delete all*.
