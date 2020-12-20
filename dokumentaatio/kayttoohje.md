@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa ensin tiedosto [sportApp.jar](https://github.com/sronja/ot-harjoitustyo/releases/tag/viikko7)
+Lataa ensin tiedosto [SportApp.jar](https://github.com/sronja/ot-harjoitustyo/releases/tag/viikko7)
 
 ## Konfigurointi
 
